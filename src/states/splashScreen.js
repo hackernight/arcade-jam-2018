@@ -6,6 +6,10 @@ class SplashScreen extends Phaser.State {
         this.game.global.input.bindQuit()
     }
 
+    loadResources() {
+        // load your resources here
+    }
+
     preload() {
         // Load only resources used on this state
         // Use this time to preload resources for the game by using the loadResources function
@@ -75,11 +79,6 @@ class SplashScreen extends Phaser.State {
         // mouse click for ezpz testing
         this.input.onDown.add(this.moveToNextState, this);
     }
-
-    loadResources() {
-        // load your resources here
-    }
-
 }
 
 module.exports = SplashScreen;
