@@ -1,5 +1,9 @@
 class Game extends Phaser.State {
 
+    init() {
+        this.game.global.input.bindQuit()
+    }
+
     constructor() {
         super();
     }

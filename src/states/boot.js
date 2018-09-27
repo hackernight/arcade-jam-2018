@@ -10,6 +10,7 @@ class Boot extends Phaser.State {
         this.game.scale.pageAlignHorizontally = true;
 
         this.initGlobalVariables();
+        this.game.global.input.bindQuit()
 
         this.game.state.start('splashScreen');
     }

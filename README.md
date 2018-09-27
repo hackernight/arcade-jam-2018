@@ -33,6 +33,8 @@ Ideally we don't need any of these in a game jam, but if you do decide we need a
 
 After doing this, you'll need to edit `src/main.js` to register the state so it can be navigated to.
 
+If you do this thing, for the Arcade Jam, you need to add an init method to the state that binds quit so the player can always exit our game.
+
 ## Relevant API docs
 
 We're using Phaser Community Edition (CE) 2.11. This is a community continuation of Phaser 2, which officially ended at 2.6.2.

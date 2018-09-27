@@ -2,6 +2,10 @@ const CenteredSprite = require('../prefabs/centeredSprite');
 
 class SplashScreen extends Phaser.State {
 
+    init() {
+        this.game.global.input.bindQuit()
+    }
+
     preload() {
         // Load only resources used on this state
         // Use this time to preload resources for the game by using the loadResources function

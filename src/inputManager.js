@@ -18,8 +18,18 @@ class InputManager {
                 a: game.input.keyboard.addKey(Phaser.Keyboard.TILDE),
                 b: game.input.keyboard.addKey(Phaser.Keyboard.ONE),
             },
-            quit: game.input.keyboard.addKey(Phaser.Keyboard.ESC)
         }
+        this.quit = game.input.keyboard.addKey(Phaser.Keyboard.ESC)
+    }
+
+    bindQuit() {
+        this.quit.onDown.add(this.quitGame, this);
+    }
+
+    quitGame() {
+        const {remote} = require('electron')
+        const w = remote.getCurrentWindow()
+        w.close()
     }
 
     bindOnDown(player, button, action, context) {
