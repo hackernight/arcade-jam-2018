@@ -4,8 +4,9 @@
 
 1. Install Yarn
 1. `yarn install` to install dependencies to your machine (You can also just run `yarn` for this)
+1. `yarn start` to start running the thing
 
-## Adding new components or scenes
+## Adding new components or states
 
 ### Creating a new Prefab
 
@@ -28,6 +29,8 @@ Ideally we don't need any of these in a game jam, but if you do decide we need a
 ## Relevant API docs
 
 We're using Phaser Community Edition (CE) 2.11. This is a community continuation of Phaser 2, which officially ended at 2.6.2.
+
+We should have both Arcade Physics and P2 Physics installed and available for use. Arcade only works with non-rotated squares, P2 is more flexible but slower.
 
 All of the Phaser CE docs are for latest version only, so if this project gets outdated, you may be misled.
 
