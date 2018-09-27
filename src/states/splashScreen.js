@@ -25,24 +25,26 @@ class SplashScreen extends Phaser.State {
         this.loadResources();
 
         await this.showStlSplash()
-        this.animateJ2FLogo()
+        await this.animateJ2FLogo()
+        await this.showJ2FText()
 
+        this.moveToNextState()
     }
 
-    async showStlSplash(callback) {
+    showStlSplash(callback) {
         const splash = new CenteredSprite(this.game, 'logo-stl');
         splash.alpha = 0;
         const millisToLeaveOnScreen = 1500
+        const tween = this.game.add.tween(splash).to({
+                alpha: 1
+            },
+            150,
+            Phaser.Easing.Linear.In,
+            true
+        ).yoyo(true, millisToLeaveOnScreen);
         return new Promise((resolve) => {
-            const tween = this.game.add.tween(splash).to({
-                    alpha: 1
-                },
-                150,
-                Phaser.Easing.Linear.In,
-                true
-            ).yoyo(true, millisToLeaveOnScreen);
 
-            tween.onComplete.add(() => {resolve()});
+            tween.onComplete.add(() => resolve());
         });
     }
 
@@ -52,29 +54,36 @@ class SplashScreen extends Phaser.State {
         logo.scale.set(2);
 
         logo.animations.add('logo');
-        return logo.animations.play('logo', 30, false);
+        const animation = logo.animations.play('logo', 30, false);
 
-        animation.onComplete.add(() => {
-            const style = {
-                font: '42px Arial',
-                fill: '#ffffff',
-                stroke: 0x333333,
-                strokeThickness: 5,
-                align: 'center'
-            };
-            const text = this.game.add.text(this.game.world.centerX, 100, 'Jokes Too Far Games', style);
-            text.alpha = 0;
-            text.anchor.set(0.5);
-            const txtTween = this.game.add.tween(text).to({
-                    alpha: 1
-                },
-                150,
-                Phaser.Easing.Linear.In,
-                true
-            );
-
-            txtTween.onComplete.add(this.moveToNextState, this);
+        return new Promise((resolve, reject) => {
+            animation.onComplete.add(() => resolve());
         });
+    }
+
+    showJ2FText() {
+        const style = {
+            font: '42px Arial',
+            fill: '#ffffff',
+            stroke: 0x333333,
+            strokeThickness: 5,
+            align: 'center'
+        };
+        const text = this.game.add.text(this.game.world.centerX, 100, 'Jokes Too Far Games', style);
+        text.alpha = 0;
+        text.anchor.set(0.5);
+        const txtTween = this.game.add.tween(text).to({
+                alpha: 1
+            },
+            1500,
+            Phaser.Easing.Linear.In,
+            true
+        );
+
+        return new Promise((resolve, reject) => {
+            txtTween.onComplete.add(() => resolve());
+        });
+
     }
 
     moveToNextState() {
