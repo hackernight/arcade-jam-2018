@@ -4044,7 +4044,7 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
 
-phaser-ce@^2.9.3:
+phaser-ce@^2.11.0:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/phaser-ce/-/phaser-ce-2.11.0.tgz#5c4f52991e34d038c72e0aa9f7d49b35b70d78e3"
 
