@@ -42,7 +42,7 @@ We should have both Arcade Physics and P2 Physics installed and available for us
 All of the Phaser CE docs are for latest version only, so if this project gets outdated, you may be misled.
 
 - [Phaser CE specific docs](https://photonstorm.github.io/phaser-ce/index.html)
-- [Phaser CE specific examples](https://codepen.io/collection/AMbZgY/)
+- [Phaser CE specific examples](https://codepen.io/collection/AMbZgY/) Will only include things added in Phaser CE; see the 2.6.2 examples below for everything Phaser can do.
 - [Phaser CE source code](https://github.com/photonstorm/phaser-ce)
 
 Older but still useful
