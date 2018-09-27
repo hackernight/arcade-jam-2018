@@ -1,14 +1,6 @@
 class Boot extends Phaser.State {
 
-  constructor() {
-    super();
-  }
-
-  preload() {
-    this.load.image('preloader', 'assets/preloader.gif');
-    this.load.image('logo-stl', 'assets/logos/stl.png');
-    this.load.spritesheet('logo-studio', 'assets/logos/studio.png', 128, 128);
-  }
+  preload() {}
 
   create() {
     this.game.input.maxPointers = 1;

@@ -2,8 +2,19 @@ const CenteredSprite = require('../prefabs/centeredSprite');
 
 class SplashScreen extends Phaser.State {
 
+  preload() {
+    // Load only resources used on this state
+    // Use this time to preload resources for the game by using the loadResources function
+    this.load.image('logo-stl', 'assets/logos/stl.png');
+    this.load.spritesheet('logo-studio', 'assets/logos/studio.png', 128, 128);
+
+    // setup loading and its events
+    this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
+  }
+
     create() {
-        this.input.onDown.add(this.skipIntro, this);
+        // Will start asynchronously loading assets
+        this.loadResources();
 
         const splash = new CenteredSprite(this.game, 'logo-stl');
         splash.alpha = 0;
@@ -48,20 +59,9 @@ class SplashScreen extends Phaser.State {
         });
     }
 
-    skipIntro() {
-        this.game.state.start('menu');
+    onLoadComplete() {
+      this.input.onDown.add(() => this.game.state.start('menu'), this);
     }
-
-    preload() {
-      // setup loading bar
-      const loadingBar = this.add.sprite(this.game.width * 0.5 - 110, this.game.height * 0.5 - 10, 'preloader');
-      this.load.setPreloadSprite(loadingBar);
-
-      // setup loading and its events
-      // this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
-      // this.loadResources();
-    }
-
 
     loadResources() {
       // load your resources here
