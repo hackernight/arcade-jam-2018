@@ -51,3 +51,7 @@ Older but still useful
 Shader-specific
 
 - [Neat shader library](http://glslsandbox.com/) constantly updated
+
+## Additional random notes
+
+Electron doesn't seem to support some of the newer ES6/7/8 syntaxes, and I'm too lazy to put a transpiler in here just yet. If something new and fancy doesn't work, try making it old and busted.
