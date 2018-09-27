@@ -1,0 +1,15 @@
+{
+  "name": "arcade-jam-2018",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/hackernight/arcade-jam-2018.git",
+  "author": "Evan Cobb <cobb.evan@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "bootstrap": "yo phaser"
+  },
+  "devDependencies": {
+    "generator-phaser": "^1.0.2",
+    "yo": "^2.0.5"
+  }
+}
