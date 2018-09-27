@@ -19,6 +19,9 @@ function createWindow() {
         show: false
     })
 
+    // comment this out if you want to test not-full-screen
+    mainWindow.setFullScreen(true)
+
     // and load the index.html of the app.
     mainWindow.loadURL(url.format({
         pathname: __dirname + '/../index.html',
