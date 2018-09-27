@@ -2,15 +2,15 @@ const CenteredSprite = require('../prefabs/centeredSprite');
 
 class SplashScreen extends Phaser.State {
 
-  preload() {
-    // Load only resources used on this state
-    // Use this time to preload resources for the game by using the loadResources function
-    this.load.image('logo-stl', 'assets/logos/stl.png');
-    this.load.spritesheet('logo-studio', 'assets/logos/studio.png', 128, 128);
+    preload() {
+        // Load only resources used on this state
+        // Use this time to preload resources for the game by using the loadResources function
+        this.load.image('logo-stl', 'assets/logos/stl.png');
+        this.load.spritesheet('logo-studio', 'assets/logos/studio.png', 128, 128);
 
-    // setup loading and its events
-    this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
-  }
+        // setup loading and its events
+        this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
+    }
 
     create() {
         // Will start asynchronously loading assets
@@ -18,8 +18,9 @@ class SplashScreen extends Phaser.State {
 
         const splash = new CenteredSprite(this.game, 'logo-stl');
         splash.alpha = 0;
-        const tween = this.game.add.tween(splash).to(
-            {alpha: 1},
+        const tween = this.game.add.tween(splash).to({
+                alpha: 1
+            },
             1500,
             Phaser.Easing.Linear.In,
             true
@@ -44,8 +45,9 @@ class SplashScreen extends Phaser.State {
                 const text = this.game.add.text(this.game.world.centerX, 100, 'Jokes Too Far Games', style);
                 text.alpha = 0;
                 text.anchor.set(0.5);
-                const txtTween = this.game.add.tween(text).to(
-                    {alpha:1},
+                const txtTween = this.game.add.tween(text).to({
+                        alpha: 1
+                    },
                     2000,
                     Phaser.Easing.Linear.In,
                     true
@@ -60,11 +62,11 @@ class SplashScreen extends Phaser.State {
     }
 
     onLoadComplete() {
-      this.input.onDown.add(() => this.game.state.start('menu'), this);
+        this.input.onDown.add(() => this.game.state.start('menu'), this);
     }
 
     loadResources() {
-      // load your resources here
+        // load your resources here
     }
 
 }
