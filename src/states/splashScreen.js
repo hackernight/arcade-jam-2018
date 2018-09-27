@@ -34,16 +34,16 @@ class SplashScreen extends Phaser.State {
     showStlSplash(callback) {
         const splash = new CenteredSprite(this.game, 'logo-stl');
         splash.alpha = 0;
+        const tweenTime = 150
         const millisToLeaveOnScreen = 1500
         const tween = this.game.add.tween(splash).to({
                 alpha: 1
             },
-            150,
+            tweenTime,
             Phaser.Easing.Linear.In,
             true
         ).yoyo(true, millisToLeaveOnScreen);
         return new Promise((resolve) => {
-
             tween.onComplete.add(() => resolve());
         });
     }
@@ -54,7 +54,9 @@ class SplashScreen extends Phaser.State {
         logo.scale.set(2);
 
         logo.animations.add('logo');
-        const animation = logo.animations.play('logo', 30, false);
+        const fps = 30
+        const shouldLoopAnimation = false
+        const animation = logo.animations.play('logo', fps, shouldLoopAnimation);
 
         return new Promise((resolve, reject) => {
             animation.onComplete.add(() => resolve());
@@ -72,10 +74,11 @@ class SplashScreen extends Phaser.State {
         const text = this.game.add.text(this.game.world.centerX, 100, 'Jokes Too Far Games', style);
         text.alpha = 0;
         text.anchor.set(0.5);
+        const tweenTime = 1500
         const txtTween = this.game.add.tween(text).to({
                 alpha: 1
             },
-            1500,
+            tweenTime,
             Phaser.Easing.Linear.In,
             true
         );
