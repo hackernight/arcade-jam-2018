@@ -53,16 +53,23 @@ class SplashScreen extends Phaser.State {
                     true
                 );
 
-                txtTween.onComplete.add(() => {
-                    this.game.state.start('menu');
-                });
-
+                txtTween.onComplete.add(this.moveToNextState, this);
             });
         });
     }
 
+    moveToNextState() {
+        this.game.state.start('menu')
+    }
+
     onLoadComplete() {
-        this.input.onDown.add(() => this.game.state.start('menu'), this);
+        this.game.global.input.bindOnDown('one', 'a', this.moveToNextState, this)
+        this.game.global.input.bindOnDown('one', 'b', this.moveToNextState, this)
+        this.game.global.input.bindOnDown('two', 'a', this.moveToNextState, this)
+        this.game.global.input.bindOnDown('two', 'b', this.moveToNextState, this)
+
+        // mouse click for ezpz testing
+        this.input.onDown.add(this.moveToNextState, this);
     }
 
     loadResources() {
