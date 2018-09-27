@@ -6,6 +6,8 @@ class Boot extends Phaser.State {
 
   preload() {
     this.load.image('preloader', 'assets/preloader.gif');
+    this.load.image('logo-stl', 'assets/logos/stl.png');
+    this.load.spritesheet('logo-studio', 'assets/logos/studio.png', 128, 128);
   }
 
   create() {
@@ -27,7 +29,7 @@ class Boot extends Phaser.State {
 
     this.initGlobalVariables();
 
-    this.game.state.start('preloader');
+    this.game.state.start('splashScreen');
   }
 
   initGlobalVariables(){
