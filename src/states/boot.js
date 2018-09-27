@@ -38,4 +38,4 @@ class Boot extends Phaser.State {
 
 }
 
-export default Boot;
+module.exports = Boot

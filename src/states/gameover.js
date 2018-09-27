@@ -32,4 +32,4 @@ class Menu extends Phaser.State {
 
 }
 
-export default Menu;
+module.exports = Menu

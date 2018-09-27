@@ -23,4 +23,4 @@ class Game extends Phaser.State {
 
 }
 
-export default Game;
+module.exports = Game

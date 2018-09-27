@@ -1,8 +1,8 @@
-import Boot from './states/boot';
-import Game from './states/game';
-import Menu from './states/menu';
-import Preloader from './states/preloader';
-import Gameover from './states/gameover';
+const Boot = require('./src/states/boot')
+const Game = require('./src/states/game')
+const Menu = require('./src/states/menu')
+const Preloader = require('./src/states/preloader')
+const Gameover = require('./src/states/gameover')
 
 
 const game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, 'arcade-jam-2018-game');

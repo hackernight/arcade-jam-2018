@@ -6,6 +6,11 @@
 1. `yarn install` to install dependencies to your machine (You can also just run `yarn` for this)
 1. `yarn start` to start running the thing
 
+## Working within Electron
+
+- You can get to a console w/ error output via View -> Toggle Developer Tools (Ctrl+I on Windows, might actually be Ctrl+Shift+I)
+- You can reload to pick up new changes from View -> Reload or View -> Force Reload (both Ctrl+R on Windows)
+
 ## Adding new components or states
 
 ### Creating a new Prefab
