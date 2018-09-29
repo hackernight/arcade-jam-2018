@@ -53,6 +53,7 @@ class Game extends Phaser.State {
         this.game.UFOWon = false;
 
         game.global.input.bindOnDown('one', 'a', this.throwEgg, this)
+        game.global.input.bindOnDown('two', 'a', this.abductChicken, this)
         this.input.onDown.add(this.endGame, this);
     }
 
@@ -91,6 +92,10 @@ class Game extends Phaser.State {
     throwEgg(){
       const flyingEgg = new ThrownEgg(this.game, gordie.x, gordie.y);
      flyingEggs.push(flyingEgg);
+    }
+
+    abductChicken(){
+      chicken.destroy();
     }
 
     endGame() {
