@@ -8,6 +8,7 @@ class TRex extends Phaser.Sprite {
   //initialization code in the constructor
   constructor(game, y, frame) {
       y = y - (SPRITE_SIZE / 2)
+      y = y + 300
       super(game, SPRITE_SIZE, y, 'gordon', frame);
       console.log("I AM GORDON, HEAR ME RAWR")
       game.physics.enable(this, Phaser.Physics.ARCADE);
