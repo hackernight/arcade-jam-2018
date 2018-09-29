@@ -79,13 +79,14 @@ class Game extends Phaser.State {
     // make egg move with Roswell
     egg.body.velocity.y = 0;
     roswell.addChild(egg);
-    egg.x = 0;
-    egg.y = 0;
+    eggHitCounter +=1;
+    var xSliceLength = roswell.body.width/(eggHitLimit + 1);
+    egg.x = ((xSliceLength * eggHitCounter) + this.game.rnd.integerInRange(0,5)) - (roswell.body.width/2);
+    egg.y = this.game.rnd.integerInRange(0, roswell.body.height/4) - (roswell.body.height/4);
     roswell.body.velocity.y = 0;
     //reset the candy position relative to Ralph
 
     //egg.velocity =0;
-    eggHitCounter +=1;
     this.eggedCounter.updateCount(eggHitCounter);
     if (eggHitCounter == eggHitLimit){
       this.endGame();
