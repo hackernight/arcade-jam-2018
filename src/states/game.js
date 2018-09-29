@@ -15,6 +15,7 @@ var roswell;
 var chicken;
 var eggHitCounter;
 var eggHitLimit;
+var isAbducting;
 
 class Game extends Phaser.State {
 
@@ -61,6 +62,13 @@ class Game extends Phaser.State {
       for (const egg of flyingEggs) {
         this.game.physics.arcade.collide(roswell, egg, this.collisionHandler, null, this)
       }
+
+      var EligibleToAbduct = chicken != null && chicken.body != null && ((roswell.body.x  < chicken.body.x) &&
+             (roswell.body.x + roswell.body.width) > (chicken.body.x + chicken.body.width));
+
+      if (isAbducting && !EligibleToAbduct){
+        isAbducting = false;
+      }
     }
 
 
@@ -98,8 +106,15 @@ class Game extends Phaser.State {
       if ((roswell.body.x  < chicken.body.x) &&
        (roswell.body.x + roswell.body.width) > (chicken.body.x + chicken.body.width))
        {
-           chicken.destroy();
+         isAbducting = true;
+         game.time.events.add(Phaser.Timer.SECOND * 3, this.finishAbduction, this);
        }
+    }
+
+    finishAbduction(){
+      if (isAbducting){
+        chicken.destroy();
+      }
     }
 
     endGame() {
