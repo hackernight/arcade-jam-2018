@@ -17,6 +17,7 @@ class Chicken extends Phaser.Sprite {
       game.physics.enable(this, Phaser.Physics.ARCADE);
       //this.frame = 0;
       game.add.existing(this);
+
       // Set Anchor to the center of your sprite
       this.anchor.setTo(.5);
       this.body.velocity.x = current_speed

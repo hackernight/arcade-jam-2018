@@ -5,6 +5,7 @@ const EggedCounter = require('../prefabs/eggedCounter')
 const ChickenCounter = require('../prefabs/chickenCounter')
 const ThrownEgg = require('../prefabs/thrownEgg')
 const Chicken = require('../prefabs/chicken')
+const AbductionBeam = require('../prefabs/AbductionBeam')
 //const style = require('../fontStyle');
 
 var flyingEggs = [];
@@ -16,6 +17,8 @@ var chicken;
 var eggHitCounter;
 var eggHitLimit;
 var isAbducting;
+var UFObeam;
+var chickenCount;
 
 class Game extends Phaser.State {
 
@@ -28,8 +31,6 @@ class Game extends Phaser.State {
     }
 
     create() {
-        game.stage.backgroundColor = "#213ad1";
-
         const text = this.add.text(this.game.width * 0.5, this.game.height * 0.5, 'Game', {
             font: '42px Arial',
             fill: '#ffffff',
@@ -44,14 +45,12 @@ class Game extends Phaser.State {
         gordie = new TRex(this.game, playerLaneY, 0);
         roswell = new UFO(this.game, playerLaneY2, 0);
         chicken = new Chicken(this.game, playerLaneY, 0);
+        chickenCount = 1;
 
         eggHitLimit = 5;
         eggHitCounter = 0;
         this.eggedCounter = new EggedCounter(this.game, eggHitLimit)
         this.chickenCounter = new ChickenCounter(this.game)
-
-        this.game.TRexWon = false;
-        this.game.UFOWon = false;
 
         game.global.input.bindOnDown('one', 'a', this.throwEgg, this)
         game.global.input.bindOnDown('two', 'a', this.abductChicken, this)
@@ -68,6 +67,7 @@ class Game extends Phaser.State {
 
       if (isAbducting && !EligibleToAbduct){
         isAbducting = false;
+        UFObeam.destroy();
       }
     }
 
@@ -79,20 +79,15 @@ class Game extends Phaser.State {
     // make egg move with Roswell
     egg.body.velocity.y = 0;
     roswell.addChild(egg);
-
-    eggHitCounter +=1;
-
-    var xSliceLength = roswell.body.width / (eggHitLimit+1);
-    egg.x = ((xSliceLength * eggHitCounter) + this.game.rnd.integerInRange(0,5))  - (roswell.body.width/2);
-    egg.y = this.game.rnd.integerInRange(0, roswell.body.height/4) - (roswell.body.height/4);
+    egg.x = 0;
+    egg.y = 0;
     roswell.body.velocity.y = 0;
     //reset the candy position relative to Ralph
 
     //egg.velocity =0;
+    eggHitCounter +=1;
     this.eggedCounter.updateCount(eggHitCounter);
     if (eggHitCounter == eggHitLimit){
-      this.game.TRexWon = true;
-      this.game.UFOWon = false;
       this.endGame();
     }
   }
@@ -107,6 +102,10 @@ class Game extends Phaser.State {
        (roswell.body.x + roswell.body.width) > (chicken.body.x + chicken.body.width))
        {
          isAbducting = true;
+         UFObeam = new AbductionBeam(this.game, playerLaneY, 0);
+         roswell.addChild(UFObeam);
+         UFObeam.x=0;
+         UFObeam.y=0;
          game.time.events.add(Phaser.Timer.SECOND * 3, this.finishAbduction, this);
        }
     }
