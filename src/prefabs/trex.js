@@ -25,6 +25,8 @@ class TRex extends Phaser.Sprite {
       this.facing = 'right';
       // Invert scale.x to flip left/right
       this.scale.x *= -1;
+
+      // game.global.input.bindOnDown('one', 'left', this.moveLeft, this)
   }
 
   //Code ran on each frame of game
@@ -36,7 +38,7 @@ class TRex extends Phaser.Sprite {
     // } else {
     //   this.digging.stop()
     }
-    if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT) || this.game.input.keyboard.isDown(Phaser.Keyboard.A))
+    if (this.game.global.input.player.one.left.isDown)
     {
       // if(!this.walkingSound.isPlaying){
       //   this.walkingSound.play()
@@ -54,7 +56,7 @@ class TRex extends Phaser.Sprite {
       this.body.velocity.x -= ACCELERATION
       this.body.velocity.x = Math.max(this.body.velocity.x, -MAX_VELOCITY)
     }
-    else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) || this.game.input.keyboard.isDown(Phaser.Keyboard.D))
+    else if (this.game.global.input.player.one.right.isDown)
     {
       // if(!this.walkingSound.isPlaying){
       //   this.walkingSound.play()
