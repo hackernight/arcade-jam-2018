@@ -55,6 +55,9 @@ class Game extends Phaser.State {
         game.global.input.bindOnDown('one', 'a', this.throwEgg, this)
         game.global.input.bindOnDown('two', 'a', this.abductChicken, this)
         this.input.onDown.add(this.endGame, this);
+
+        this.game.TRexWon = false;
+        this.game.UFOWon = false;
     }
 
     update() {
@@ -89,6 +92,8 @@ class Game extends Phaser.State {
     //egg.velocity =0;
     this.eggedCounter.updateCount(eggHitCounter);
     if (eggHitCounter == eggHitLimit){
+      this.game.TRexWon = true;
+      this.game.UFOWon = false;
       this.endGame();
     }
   }
@@ -114,6 +119,9 @@ class Game extends Phaser.State {
     finishAbduction(){
       if (isAbducting){
         chicken.destroy();
+        this.game.TRexWon = false;
+        this.game.UFOWon = true;
+        this.endGame();
       }
     }
 
