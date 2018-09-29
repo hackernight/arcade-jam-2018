@@ -1,5 +1,5 @@
-import TRex from '../prefabs/trex'
-import UFO from '../prefabs/ufo'
+//import TRex from '../prefabs/trex'
+//import UFO from '../prefabs/ufo'
 
 class Game extends Phaser.State {
 
