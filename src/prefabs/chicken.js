@@ -1,17 +1,20 @@
 const SPRITE_SIZE=128;
-const MAX_SPEED = -90;
-const ACCELERATION = 2;
-
-
+const MAX_VELOCITY = 250;
+const ACCELERATION = 25;
 
 //Documentation for Phaser's (2.6.2) sprites:: phaser.io/docs/2.6.2/Phaser.Sprite.html
-class ThrownEgg extends Phaser.Sprite {
+class Chicken extends Phaser.Sprite {
 
   //initialization code in the constructor
-  constructor(game, x, y) {
-      super(game, x, y, 'eggie', 0);
+  constructor(game, x, y, frame) {
+    y = 800;
+    x = 400;
+
+    super(game, x, y, 'chicken', frame);
+    console.log("I AM CHICK-CHICK-CHICKEN!")
+      //super(game, x, y, 'chicken');
       game.physics.enable(this, Phaser.Physics.ARCADE);
-      this.frame = 0;
+      //this.frame = 0;
       game.add.existing(this);
       // Set Anchor to the center of your sprite
       this.anchor.setTo(.5);
@@ -19,24 +22,18 @@ class ThrownEgg extends Phaser.Sprite {
       //this.walkingSound = this.game.add.audio('walking')
       //this.walkingSound.volume = .3
       //this.digging = this.game.add.audio('digging')
-      //this.facing = 'right';
+      this.facing = 'right';
       // Invert scale.x to flip left/right
-      //this.scale.x *= -1;
+      this.scale.x *= -1;
       // game.global.input.bindOnDown('one', 'left', this.moveLeft, this)
-
   }
 
   //Code ran on each frame of game
   update() {
-    if (this.body.velocity.y > MAX_SPEED) {
-      this.body.velocity.y  -= ACCELERATION
-    }
-    this.angle = Math.sin(this.game.time.time * 1/500) * 5
-
   }
 
 
 
 }
 
-module.exports = ThrownEgg;
+module.exports = Chicken;
