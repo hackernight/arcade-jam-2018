@@ -4,6 +4,7 @@ const UFO = require('../prefabs/ufo');
 const EggedCounter = require('../prefabs/eggedCounter')
 const ChickenCounter = require('../prefabs/chickenCounter')
 const ThrownEgg = require('../prefabs/thrownEgg')
+const Chicken = require('../prefabs/chicken')
 //const style = require('../fontStyle');
 
 var flyingEggs = [];
@@ -11,6 +12,7 @@ var playerLaneY;
 var playerLaneY2;
 var gordie;
 var roswell;
+var chicken;
 
 class Game extends Phaser.State {
 
@@ -36,6 +38,7 @@ class Game extends Phaser.State {
 
         gordie = new TRex(this.game, playerLaneY, 0);
         roswell = new UFO(this.game, playerLaneY2, 0);
+        chicken = new Chicken(this.game, playerLaneY, 0);
 
         this.eggedCounter = new EggedCounter(this.game)
         this.chickenCounter = new ChickenCounter(this.game)

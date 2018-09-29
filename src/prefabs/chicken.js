@@ -7,8 +7,8 @@ class Chicken extends Phaser.Sprite {
 
   //initialization code in the constructor
   constructor(game, x, y, frame) {
-    y = 800;
-    x = 400;
+    y =700;
+    x = 500;
 
     super(game, x, y, 'chicken', frame);
     console.log("I AM CHICK-CHICK-CHICKEN!")
