@@ -9,6 +9,7 @@ class Menu extends Phaser.State {
     }
 
     create() {
+        game.stage.backgroundColor = "#213ad1";
         const text = this.add.text(this.game.width * 0.5, this.game.height * 0.5, 'MENU', {
             font: '42px Arial',
             fill: '#ffffff',

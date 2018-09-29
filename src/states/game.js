@@ -49,9 +49,10 @@ class Game extends Phaser.State {
         this.eggedCounter = new EggedCounter(this.game, eggHitLimit)
         this.chickenCounter = new ChickenCounter(this.game)
 
+        this.game.TRexWon = false;
+        this.game.UFOWon = false;
+
         game.global.input.bindOnDown('one', 'a', this.throwEgg, this)
-
-
         this.input.onDown.add(this.endGame, this);
     }
 
@@ -81,6 +82,8 @@ class Game extends Phaser.State {
     //egg.velocity =0;
     this.eggedCounter.updateCount(eggHitCounter);
     if (eggHitCounter == eggHitLimit){
+      this.game.TRexWon = true;
+      this.game.UFOWon = false;
       this.endGame();
     }
   }
