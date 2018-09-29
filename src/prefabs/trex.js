@@ -1,3 +1,6 @@
+
+const ThrownEgg = require('../prefabs/thrownEgg')
+
 const SPRITE_SIZE=128;
 const MAX_VELOCITY = 250;
 const ACCELERATION = 25;
@@ -17,6 +20,8 @@ class TRex extends Phaser.Sprite {
       // Set Anchor to the center of your sprite
       this.anchor.setTo(.5);
 
+
+
       this.animations.add('run', [0,1,2,3,4,5,6], 20, false);
       this.animations.add('build', [8,9,10,11,12,13,14,15,8,9,10,11,12,13,14,15], 30, false);
       //this.walkingSound = this.game.add.audio('walking')
@@ -25,8 +30,11 @@ class TRex extends Phaser.Sprite {
       this.facing = 'right';
       // Invert scale.x to flip left/right
       this.scale.x *= -1;
+      game.global.input.bindOnDown('one', 'a', this.throwEgg, this)
+  }
 
-      // game.global.input.bindOnDown('one', 'left', this.moveLeft, this)
+  throwEgg(){
+    const egg = new ThrownEgg(game, this.x, this.y);
   }
 
   //Code ran on each frame of game
