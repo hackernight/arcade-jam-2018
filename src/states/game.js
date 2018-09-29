@@ -13,6 +13,8 @@ var playerLaneY2;
 var gordie;
 var roswell;
 var chicken;
+var eggHitCounter;
+var eggHitLimit;
 
 class Game extends Phaser.State {
 
@@ -42,10 +44,13 @@ class Game extends Phaser.State {
         roswell = new UFO(this.game, playerLaneY2, 0);
         chicken = new Chicken(this.game, playerLaneY, 0);
 
-        this.eggedCounter = new EggedCounter(this.game)
+        eggHitLimit = 5;
+        eggHitCounter = 0;
+        this.eggedCounter = new EggedCounter(this.game, eggHitLimit)
         this.chickenCounter = new ChickenCounter(this.game)
 
         game.global.input.bindOnDown('one', 'a', this.throwEgg, this)
+
 
         this.input.onDown.add(this.endGame, this);
     }
@@ -58,12 +63,23 @@ class Game extends Phaser.State {
 
 
   collisionHandler(roswell, egg) {
+    egg.body.enable = false;
+    egg.splatter();
+
     // make egg move with Roswell
+    egg.body.velocity.y = 0;
     roswell.addChild(egg);
-    //reset the candy position relative to Ralph
     egg.x = 0;
     egg.y = 0;
-    this.endGame();
+    roswell.body.velocity.y = 0;
+    //reset the candy position relative to Ralph
+
+    //egg.velocity =0;
+    eggHitCounter +=1;
+    this.eggedCounter.updateCount(eggHitCounter);
+    if (eggHitCounter == eggHitLimit){
+      this.endGame();
+    }
   }
 
     throwEgg(){

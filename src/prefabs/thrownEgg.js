@@ -1,6 +1,6 @@
 const SPRITE_SIZE=128;
-const MAX_SPEED = -90;
-const ACCELERATION = 2;
+const MAX_SPEED = -600;
+const ACCELERATION = 5;
 
 
 
@@ -13,8 +13,12 @@ class ThrownEgg extends Phaser.Sprite {
       game.physics.enable(this, Phaser.Physics.ARCADE);
       this.frame = 0;
       game.add.existing(this);
+      this.body.velocity.y = MAX_SPEED;
       // Set Anchor to the center of your sprite
       this.anchor.setTo(.5);
+
+      this.isSplattering = false;
+      this.animations.add('splatter', [1,2,3], 20, false);
 
       //this.walkingSound = this.game.add.audio('walking')
       //this.walkingSound.volume = .3
@@ -28,11 +32,16 @@ class ThrownEgg extends Phaser.Sprite {
 
   //Code ran on each frame of game
   update() {
-    if (this.body.velocity.y > MAX_SPEED) {
-      this.body.velocity.y  -= ACCELERATION
+    if (!this.isSplattering){
+    this.body.velocity.y  += ACCELERATION
     }
-    this.angle = Math.sin(this.game.time.time * 1/500) * 5
+    this.angle = Math.sin(this.game.time.time * 1/50) * 5
 
+  }
+
+  splatter(){
+    this.isSplattering = true;
+    this.animations.play("splatter");
   }
 
 
