@@ -35,7 +35,7 @@ class UFO extends Phaser.Sprite {
     } else {
       this.digging.stop()
     }
-    if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT) || this.game.input.keyboard.isDown(Phaser.Keyboard.A))
+    if (this.game.global.input.player.two.left.isDown)
     {
       if(!this.walkingSound.isPlaying){
         this.walkingSound.play()
@@ -53,7 +53,7 @@ class UFO extends Phaser.Sprite {
       this.body.velocity.x -= ACCELERATION
       this.body.velocity.x = Math.max(this.body.velocity.x, -MAX_VELOCITY)
     }
-    else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) || this.game.input.keyboard.isDown(Phaser.Keyboard.D))
+    else if (this.game.global.input.player.two.right.isDown)
     {
       if(!this.walkingSound.isPlaying){
         this.walkingSound.play()
