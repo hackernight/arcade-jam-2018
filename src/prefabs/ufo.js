@@ -4,8 +4,8 @@ var space;
 class UFO extends Phaser.Sprite {
   //initialization code in the constructor
   constructor(game, x, y, frame) {
-    x = x - (SPRITE_SIZE / 2)
-    y = y - (SPRITE_SIZE / 2)
+    //x = x - (SPRITE_SIZE / 2)
+    //y = y - (SPRITE_SIZE / 2)
     //super(game, x, y, 'ralph', frame);
     //this.anchor.setTo(.5);
     //this.animations.add('run', [1,2,3,4,5,6,7,8], 3, true);
@@ -28,4 +28,4 @@ class UFO extends Phaser.Sprite {
 
 }
 
-export default UFO;
+module.exports = UFO;
