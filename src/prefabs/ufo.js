@@ -7,7 +7,7 @@ class UFO extends Phaser.Sprite {
   //initialization code in the constructor
   constructor(game, y, frame) {
       y = y - (SPRITE_SIZE / 2)
-      y = y - 200
+      y = y - 150
       super(game, SPRITE_SIZE, y, 'roswell', frame);
       console.log("Im the UFO!")
       game.physics.enable(this, Phaser.Physics.ARCADE);

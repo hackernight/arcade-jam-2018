@@ -10,6 +10,7 @@ class SplashScreen extends Phaser.State {
         // load your resources here
         console.log('loading actual resources');
         this.game.load.spritesheet('gordon', 'assets/gordon.png', 128, 128)
+        this.game.load.spritesheet('roswell', 'assets/ufo.png', 256, 128)
     }
 
     preload() {
