@@ -2,6 +2,10 @@
 const TRex = require('../prefabs/trex');
 const UFO = require('../prefabs/ufo');
 
+
+var playerLaneY;
+var gordie;
+
 class Game extends Phaser.State {
 
     init() {
@@ -19,6 +23,12 @@ class Game extends Phaser.State {
             align: 'center'
         });
         text.anchor.set(0.5);
+
+        var height = this.game.height
+        playerLaneY = (height / 3) + 64 * 2.5
+
+        gordie = new TRex(this.game, playerLaneY, 0);
+
 
         this.input.onDown.add(this.endGame, this);
     }
