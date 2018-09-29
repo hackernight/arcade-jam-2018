@@ -25,6 +25,8 @@ class Game extends Phaser.State {
     }
 
     create() {
+        game.stage.backgroundColor = "#213ad1";
+
         const text = this.add.text(this.game.width * 0.5, this.game.height * 0.5, 'Game', {
             font: '42px Arial',
             fill: '#ffffff',
