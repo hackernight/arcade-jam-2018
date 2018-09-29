@@ -2,14 +2,14 @@ const style = require('../fontStyle');
 
 const decimalPlacesToShow = 1
 
-class EggedCounter extends Phaser.Text {
+class ChickenCounter extends Phaser.Text {
 
   constructor(game) {
-    super(game, game.world.width, 0, '', style)
+    super(game, 0, 0, '', style)
     //this.timer = timer
-    this.text = "🍳 0/3"
+    this.text = "🐓 3/3"
     this.fontSize = 32
-    this.anchor.setTo(1, 0)
+    //this.anchor.setTo(1, 0)
     game.add.existing(this)
     //🐣
     //🥚
@@ -31,4 +31,4 @@ class EggedCounter extends Phaser.Text {
 
 }
 
-module.exports = EggedCounter
+module.exports = ChickenCounter
