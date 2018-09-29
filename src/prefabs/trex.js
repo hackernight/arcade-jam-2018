@@ -18,9 +18,9 @@ class TRex extends Phaser.Sprite {
 
       this.animations.add('run', [0,1,2,3,4,5,6], 20, false);
       this.animations.add('build', [8,9,10,11,12,13,14,15,8,9,10,11,12,13,14,15], 30, false);
-      this.walkingSound = this.game.add.audio('walking')
-      this.walkingSound.volume = .3
-      this.digging = this.game.add.audio('digging')
+      //this.walkingSound = this.game.add.audio('walking')
+      //this.walkingSound.volume = .3
+      //this.digging = this.game.add.audio('digging')
       this.facing = 'right';
       // Invert scale.x to flip left/right
       this.scale.x *= -1;
@@ -32,15 +32,15 @@ class TRex extends Phaser.Sprite {
     if (this.animations.currentAnim.name =="build" && this.animations.currentAnim.isPlaying==true){
       //console.log('current anim: ', this.animations.currentAnim.name, ', isplaying = ', this.animations.currentAnim.isPlaying)
       return;
-    } else {
-      this.digging.stop()
+    // } else {
+    //   this.digging.stop()
     }
     if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT) || this.game.input.keyboard.isDown(Phaser.Keyboard.A))
     {
-      if(!this.walkingSound.isPlaying){
-        this.walkingSound.play()
-      }
-
+      // if(!this.walkingSound.isPlaying){
+      //   this.walkingSound.play()
+      // }
+      //
       if (this.animations.currentAnim.name !="run" || this.animations.currentAnim.isPlaying==false){
         this.animations.play("run");
       }
@@ -55,10 +55,10 @@ class TRex extends Phaser.Sprite {
     }
     else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) || this.game.input.keyboard.isDown(Phaser.Keyboard.D))
     {
-      if(!this.walkingSound.isPlaying){
-        this.walkingSound.play()
-      }
-
+      // if(!this.walkingSound.isPlaying){
+      //   this.walkingSound.play()
+      // }
+      //
       if (this.animations.currentAnim.name !="run" || this.animations.currentAnim.isPlaying==false){
         this.animations.play("run");
       }

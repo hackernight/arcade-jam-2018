@@ -8,7 +8,8 @@ class SplashScreen extends Phaser.State {
 
     loadResources() {
         // load your resources here
-        this.game.load.spritesheet('gordon', '../../assets/gordon.png', 128, 128, 18)
+        console.log('loading actual resources');
+        this.game.load.spritesheet('gordon', 'assets/gordon.png', 128, 128)
     }
 
     preload() {
@@ -17,14 +18,14 @@ class SplashScreen extends Phaser.State {
         this.load.image('logo-stl', 'assets/logos/stl.png');
         this.load.spritesheet('logo-studio', 'assets/logos/studio.png', 128, 128);
 
+        // Will start asynchronously loading assets
+        this.loadResources();
+
         // setup loading and its events
         this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
     }
 
     async create() {
-        // Will start asynchronously loading assets
-        this.loadResources();
-
         await this.showStlSplash()
         await this.animateJ2FLogo()
         await this.showJ2FText()
@@ -95,6 +96,8 @@ class SplashScreen extends Phaser.State {
     }
 
     onLoadComplete() {
+      console.log('loading done, should be able to move forward now');
+      console.log(this.game.cache);
         this.game.global.input.bindOnDown('one', 'a', this.moveToNextState, this)
         this.game.global.input.bindOnDown('one', 'b', this.moveToNextState, this)
         this.game.global.input.bindOnDown('two', 'a', this.moveToNextState, this)

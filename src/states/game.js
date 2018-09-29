@@ -1,4 +1,3 @@
-//import TRex from '../prefabs/trex'
 const TRex = require('../prefabs/trex');
 const UFO = require('../prefabs/ufo');
 
