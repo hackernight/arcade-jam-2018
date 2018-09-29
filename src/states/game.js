@@ -95,7 +95,11 @@ class Game extends Phaser.State {
     }
 
     abductChicken(){
-      chicken.destroy();
+      if ((roswell.body.x  < chicken.body.x) &&
+       (roswell.body.x + roswell.body.width) > (chicken.body.x + chicken.body.width))
+       {
+           chicken.destroy();
+       }
     }
 
     endGame() {
