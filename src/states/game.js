@@ -1,9 +1,12 @@
+//import TRex from '../prefabs/trex'
 const TRex = require('../prefabs/trex');
 const UFO = require('../prefabs/ufo');
 
 
 var playerLaneY;
+var playerLaneY2;
 var gordie;
+var roswell;
 
 class Game extends Phaser.State {
 
@@ -25,9 +28,10 @@ class Game extends Phaser.State {
 
         var height = this.game.height
         playerLaneY = (height / 3) + 64 * 2.5
+        playerLaneY2 = (height / 3) + 32 * 2.5
 
         gordie = new TRex(this.game, playerLaneY, 0);
-
+        roswell = new UFO(this.game, playerLaneY2, 0);
 
         this.input.onDown.add(this.endGame, this);
     }
