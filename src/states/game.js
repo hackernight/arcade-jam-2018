@@ -108,10 +108,12 @@ class Game extends Phaser.State {
        (roswell.body.x + roswell.body.width) > (chicken.body.x + chicken.body.width))
        {
          isAbducting = true;
-         UFObeam = new AbductionBeam(this.game, playerLaneY, 0);
+         UFObeam = new AbductionBeam(this.game, playerLaneY, 0, roswell.width);
          roswell.addChild(UFObeam);
          UFObeam.x=0;
          UFObeam.y=0;
+         UFObeam.anchor.y = 0;
+         UFObeam.expandBeam();
          game.time.events.add(Phaser.Timer.SECOND * 3, this.finishAbduction, this);
        }
     }
