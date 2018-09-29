@@ -3,8 +3,10 @@ const TRex = require('../prefabs/trex');
 const UFO = require('../prefabs/ufo');
 const EggedCounter = require('../prefabs/eggedCounter')
 const ChickenCounter = require('../prefabs/chickenCounter')
+const ThrownEgg = require('../prefabs/thrownEgg')
 //const style = require('../fontStyle');
 
+var flyingEggs = [];
 var playerLaneY;
 var playerLaneY2;
 var gordie;
@@ -38,12 +40,30 @@ class Game extends Phaser.State {
         this.eggedCounter = new EggedCounter(this.game)
         this.chickenCounter = new ChickenCounter(this.game)
 
+        game.global.input.bindOnDown('one', 'a', this.throwEgg, this)
 
         this.input.onDown.add(this.endGame, this);
     }
 
     update() {
+      for (const egg of flyingEggs) {
+        this.game.physics.arcade.collide(roswell, egg, this.collisionHandler, null, this)
+      }
+    }
 
+
+  collisionHandler(roswell, egg) {
+    // make egg move with Roswell
+    roswell.addChild(egg);
+    //reset the candy position relative to Ralph
+    egg.x = 0;
+    egg.y = 0;
+    this.endGame();
+  }
+
+    throwEgg(){
+      const flyingEgg = new ThrownEgg(this.game, gordie.x, gordie.y);
+     flyingEggs.push(flyingEgg);
     }
 
     endGame() {

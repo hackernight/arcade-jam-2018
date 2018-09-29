@@ -30,11 +30,11 @@ class TRex extends Phaser.Sprite {
       this.facing = 'right';
       // Invert scale.x to flip left/right
       this.scale.x *= -1;
-      game.global.input.bindOnDown('one', 'a', this.throwEgg, this)
   }
 
   throwEgg(){
-    const egg = new ThrownEgg(game, this.x, this.y);
+    this.game.throwEgg(this.x, this.y)
+    //const egg = new ThrownEgg(game, );
   }
 
   //Code ran on each frame of game

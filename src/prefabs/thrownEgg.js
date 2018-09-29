@@ -31,6 +31,7 @@ class ThrownEgg extends Phaser.Sprite {
     if (this.body.velocity.y > MAX_SPEED) {
       this.body.velocity.y  -= ACCELERATION
     }
+    this.angle = Math.sin(this.game.time.time * 1/500) * 5
 
   }
 
