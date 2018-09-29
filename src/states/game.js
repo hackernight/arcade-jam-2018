@@ -1,7 +1,9 @@
 //import TRex from '../prefabs/trex'
 const TRex = require('../prefabs/trex');
 const UFO = require('../prefabs/ufo');
-
+const EggedCounter = require('../prefabs/eggedCounter')
+const ChickenCounter = require('../prefabs/chickenCounter')
+//const style = require('../fontStyle');
 
 var playerLaneY;
 var playerLaneY2;
@@ -32,6 +34,10 @@ class Game extends Phaser.State {
 
         gordie = new TRex(this.game, playerLaneY, 0);
         roswell = new UFO(this.game, playerLaneY2, 0);
+
+        this.eggedCounter = new EggedCounter(this.game)
+        this.chickenCounter = new ChickenCounter(this.game)
+
 
         this.input.onDown.add(this.endGame, this);
     }
