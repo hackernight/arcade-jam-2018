@@ -15,6 +15,7 @@ var roswell;
 var chicken;
 var eggHitCounter;
 var eggHitLimit;
+var isAbducting;
 
 class Game extends Phaser.State {
 
@@ -49,15 +50,24 @@ class Game extends Phaser.State {
         this.eggedCounter = new EggedCounter(this.game, eggHitLimit)
         this.chickenCounter = new ChickenCounter(this.game)
 
+        this.game.TRexWon = false;
+        this.game.UFOWon = false;
+
         game.global.input.bindOnDown('one', 'a', this.throwEgg, this)
-
-
+        game.global.input.bindOnDown('two', 'a', this.abductChicken, this)
         this.input.onDown.add(this.endGame, this);
     }
 
     update() {
       for (const egg of flyingEggs) {
         this.game.physics.arcade.collide(roswell, egg, this.collisionHandler, null, this)
+      }
+
+      var EligibleToAbduct = chicken != null && chicken.body != null && ((roswell.body.x  < chicken.body.x) &&
+             (roswell.body.x + roswell.body.width) > (chicken.body.x + chicken.body.width));
+
+      if (isAbducting && !EligibleToAbduct){
+        isAbducting = false;
       }
     }
 
@@ -81,6 +91,8 @@ class Game extends Phaser.State {
     //egg.velocity =0;
     this.eggedCounter.updateCount(eggHitCounter);
     if (eggHitCounter == eggHitLimit){
+      this.game.TRexWon = true;
+      this.game.UFOWon = false;
       this.endGame();
     }
   }
@@ -88,6 +100,21 @@ class Game extends Phaser.State {
     throwEgg(){
       const flyingEgg = new ThrownEgg(this.game, gordie.x, gordie.y);
      flyingEggs.push(flyingEgg);
+    }
+
+    abductChicken(){
+      if ((roswell.body.x  < chicken.body.x) &&
+       (roswell.body.x + roswell.body.width) > (chicken.body.x + chicken.body.width))
+       {
+         isAbducting = true;
+         game.time.events.add(Phaser.Timer.SECOND * 3, this.finishAbduction, this);
+       }
+    }
+
+    finishAbduction(){
+      if (isAbducting){
+        chicken.destroy();
+      }
     }
 
     endGame() {
