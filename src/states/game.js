@@ -1,5 +1,6 @@
 //import TRex from '../prefabs/trex'
-//import UFO from '../prefabs/ufo'
+const TRex = require('../prefabs/trex');
+const UFO = require('../prefabs/ufo');
 
 class Game extends Phaser.State {
 

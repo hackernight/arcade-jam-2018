@@ -96,4 +96,4 @@ class TRex extends Phaser.Sprite {
 
 }
 
-export default TRex;
+module.exports = TRex;
