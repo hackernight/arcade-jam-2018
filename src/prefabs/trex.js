@@ -42,7 +42,8 @@ class TRex extends Phaser.Sprite {
   //Code ran on each frame of game
   update() {
     this.bringToTop()
-    if (this.animations.currentAnim.name =="build" && this.animations.currentAnim.isPlaying==true){
+    if (this.animations.currentAnim.name =="throw" && this.animations.currentAnim.isPlaying==true){
+      this.body.velocity.x = 0;
       //console.log('current anim: ', this.animations.currentAnim.name, ', isplaying = ', this.animations.currentAnim.isPlaying)
       return;
     // } else {
