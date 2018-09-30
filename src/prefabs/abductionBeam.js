@@ -43,6 +43,10 @@ class AbductionBeam extends Phaser.Sprite {
       this.animations.play("sparkle", 15, true);
     }
 
+    stopBeam(){
+      this.animations.stop();
+    }
+
   //Code ran on each frame of game
   update() {
 

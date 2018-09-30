@@ -3,7 +3,7 @@ const MAX_VELOCITY = 50;
 const ACCELERATION = 25;
 var current_speed = -100;
 
-var isBeingAbducted = false;
+var isAbducting = false;
 
 //Documentation for Phaser's (2.6.2) sprites:: phaser.io/docs/2.6.2/Phaser.Sprite.html
 class Chicken extends Phaser.Sprite {
@@ -19,6 +19,7 @@ class Chicken extends Phaser.Sprite {
       game.physics.enable(this, Phaser.Physics.ARCADE);
       //this.frame = 0;
       game.add.existing(this);
+
 
       // Set Anchor to the center of your sprite
       this.anchor.setTo(.5);
