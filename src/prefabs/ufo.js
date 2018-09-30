@@ -21,9 +21,9 @@ class UFO extends Phaser.Sprite {
       //this.walkingSound = this.game.add.audio('walking')
       //this.walkingSound.volume = .3
       //this.digging = this.game.add.audio('digging')
-      this.facing = 'right';
+      //this.facing = 'right';
       // Invert scale.x to flip left/right
-      this.scale.x *= -1;
+      //this.scale.x *= -1;
   }
 
   //Code ran on each frame of game
@@ -43,11 +43,11 @@ class UFO extends Phaser.Sprite {
         this.animations.play("run");
       }
 
-      if (this.facing == 'right'){
-        // Invert scale.x to flip left/right
-        this.scale.x *= -1;
-        this.facing = 'left';
-      }
+      // if (this.facing == 'right'){
+      //   // Invert scale.x to flip left/right
+      //   this.scale.x *= -1;
+      //   this.facing = 'left';
+      // }
       this.body.velocity.x -= ACCELERATION
       this.body.velocity.x = Math.max(this.body.velocity.x, -MAX_VELOCITY)
     }
@@ -60,11 +60,11 @@ class UFO extends Phaser.Sprite {
       if (this.animations.currentAnim.name !="run" || this.animations.currentAnim.isPlaying==false){
         this.animations.play("run");
       }
-      if (this.facing == 'left'){
-        // Invert scale.x to flip left/right
-        this.scale.x *= -1;
-        this.facing = 'right';
-      }
+      // if (this.facing == 'left'){
+      //   // Invert scale.x to flip left/right
+      //   this.scale.x *= -1;
+      //   this.facing = 'right';
+      // }
 
       this.body.velocity.x += ACCELERATION
       this.body.velocity.x = Math.min(this.body.velocity.x, MAX_VELOCITY)
