@@ -221,7 +221,8 @@ queueEgg(eggCount) {
     ChickenMakeDecision(){
 
       for(const chicken of chickens){
-        chicken.ChangeDirection();
+        let action = game.math.roundTo(this.game.rnd.integerInRange(1,3), 0)
+        chicken.ChangeDirection(action);
       }
 
     }

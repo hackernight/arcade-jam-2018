@@ -20,7 +20,7 @@ class Chicken extends Phaser.Sprite {
       game.add.existing(this);
 
 
-      //this.anchor.setTo(.5);
+      this.anchor.setTo(.5);
       this.groundLevely = this.body.y;
       // Set Anchor to the center of your sprite
       this.body.velocity.x = current_speed
@@ -33,13 +33,35 @@ class Chicken extends Phaser.Sprite {
       // game.global.input.bindOnDown('one', 'left', this.moveLeft, this)
   }
 
-  ChangeDirection(){
-    let action = game.math.roundTo(this.game.rnd.integerInRange(1,3), 0)
-
+  ChangeDirection(action){
 
     if (action==1){
+      //change direction
+        if (this.body.velocity.x==0){
+          if (this.scale.x < 0){
+            this.body.velocity.x = current_speed;
+          }
+          else {
+            this.body.velocity.x = -current_speed;
+          }
+        }
         this.body.velocity.x=this.body.velocity.x * -1;
         this.scale.x *= -1;
+    }
+    if (action==2){
+      //stop
+      this.body.velocity.x = 0;
+    }
+    if (action==3){
+      //resume/continue in the direction you were going
+      if (this.body.velocity.x==0){
+        if (this.scale.x < 0){
+          this.body.velocity.x = current_speed;
+        }
+        else {
+          this.body.velocity.x = -current_speed;
+        }
+      }
     }
 
 
