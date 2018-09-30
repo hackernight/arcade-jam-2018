@@ -109,11 +109,11 @@ class Game extends Phaser.State {
 
         if (!inEndState){
           for (const egg of flyingEggs) {
-          this.game.physics.arcade.overlap(roswell, egg, this.collisionHandler, null, this)
+          this.game.physics.arcade.collide(roswell, egg, this.collisionHandler, null, this)
           //  this.game.physics.arcade.collide(gordie, egg, this.pickupCollisionHandler, null, this)
           }
           for (const egg of laidEggs) {
-          this.game.physics.arcade.overlap(gordie, egg, this.pickupCollisionHandler, null, this)
+          this.game.physics.arcade.collide(gordie, egg, this.pickupCollisionHandler, null, this)
           }
           for (const chicken of chickens) {
           this.game.physics.arcade.overlap(roswell, chicken, this.abductionCollisionHandler, null, this)
@@ -251,10 +251,12 @@ queueEgg(eggCount) {
         let action = game.math.roundTo(this.game.rnd.integerInRange(1,10), 0)
         chicken.ChangeDirection(action);
 
-        let chickenroll = action==10 || (chickens.length <=2 && laidEggs.length + dinoAmmo ==0 && (action >=5 || action <=7));
+        let chickenLaysEgg = action==3 ||
+                 (laidEggs.length + dinoAmmo ==0 && (action >=3 || action <=4)) ||
+                (chickens.length <=2 && laidEggs.length + dinoAmmo <0 && (action >=3 || action <=5));
 
 
-        if (chickenroll && this.CanSpawnMoreEggs() && chicken.body.y == chicken.groundLevely){
+        if (chickenLaysEgg && this.CanSpawnMoreEggs() && chicken.body.y == chicken.groundLevely){
           console.log("Chicken laid egg")
           var egg = new LaidEgg(this.game, chicken.body.x, playerLaneY, 0);
           laidEggs.push(egg);

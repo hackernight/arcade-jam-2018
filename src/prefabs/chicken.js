@@ -49,11 +49,11 @@ class Chicken extends Phaser.Sprite {
         this.body.velocity.x=this.body.velocity.x * -1;
         this.scale.x *= -1;
     }
-    if (action>=3 && action <=4){
+    if (action>=3 && action <=5){
       //stop
       this.body.velocity.x = 0;
     }
-    if (action >=5 && action <=8){
+    if (action >=6 && action <=9){
       //resume/continue in the direction you were going
       if (this.body.velocity.x==0){
         if (this.scale.x < 0){
@@ -64,7 +64,7 @@ class Chicken extends Phaser.Sprite {
         }
       }
     }
-    if (action==9){
+    if (action==10){
       this.body.velocity.x = this.body.velocity.x * 2;
     }
 
