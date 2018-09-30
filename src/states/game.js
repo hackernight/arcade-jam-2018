@@ -28,6 +28,7 @@ var eggCount;
 var dinoAmmo;
 var inEndState;
 const EggLimit = 2;
+var ufoStunned;
 
 class Game extends Phaser.State {
 
@@ -54,6 +55,7 @@ class Game extends Phaser.State {
         gordie = new TRex(this.game, playerLaneY- 50, 0);
         roswell = new UFO(this.game, this.game.width - 100, playerLaneY2, 0);
 
+        ufoStunned = false;
         UFObeam = new AbductionBeam(this.game, playerLaneY, 0, roswell.width);
         roswell.addChild(UFObeam);
         UFObeam.x=0;
@@ -156,9 +158,15 @@ queueEgg(eggCount) {
   }
 }
 
+  UFONotStunned(){
+    ufoStunned = false;
+  }
+
   collisionHandler(roswell, egg) {
     if (inEndState){return;}
 
+    ufoStunned = true;
+    game.time.events.add(Phaser.Timer.SECOND, this.UFONotStunned, this);
     egg.body.enable = false;
     egg.splatter();
 
@@ -224,7 +232,7 @@ queueEgg(eggCount) {
     }
 
     abductChicken(){
-      if (inEndState){return;}
+      if (inEndState || ufoStunned){return;}
 
       let abductionValid = false;
       for(const chicken of chickens){
@@ -248,13 +256,19 @@ queueEgg(eggCount) {
     ChickenMakeDecision(){
 
       for(const chicken of chickens){
+
         let action = game.math.roundTo(this.game.rnd.integerInRange(1,10), 0)
-        chicken.ChangeDirection(action);
 
         let chickenLaysEgg = action==3 ||
                  (laidEggs.length + dinoAmmo ==0 && (action >=3 || action <=4)) ||
                 (chickens.length <=2 && laidEggs.length + dinoAmmo <0 && (action >=3 || action <=5));
 
+        //if being abducted, chicken is probably going to settle down
+        if (chicken.isAbducting && action<3){action = 4;}
+
+        if (chickens.length==1&& !chicken.isAbducting && action >=8){ action = 10}
+
+        chicken.ChangeDirection(action);
 
         if (chickenLaysEgg && this.CanSpawnMoreEggs() && chicken.body.y == chicken.groundLevely){
           console.log("Chicken laid egg")

@@ -22,7 +22,7 @@ class Menu extends Phaser.State {
         new CenteredText(this.game, this.game.height * 0.28, 'Fowl', {fontSize: '150px', font: 'BirdFeather'})
 
         const text = this.add.text(this.game.world.centerX, this.game.height * 0.6,
-          "T-Rex 🦖: throw your eggs 🥚 at the UFO 🛸\n\nUFO 🛸: catch 🎐 all the chickens 🐓"
+          "T-Rex 🦖: pick up eggs 🥚, throw eggs 🥚 at the UFO 🛸\n\nUFO 🛸: catch 🎐 all the chickens 🐓"
           , {
             font: '30px Emoji',
             fill: '#ffffff',

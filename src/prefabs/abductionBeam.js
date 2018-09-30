@@ -19,6 +19,7 @@ class AbductionBeam extends Phaser.Sprite {
       this.height = this.game.height;
       this.width = width;
 
+      this.alpha = 0.7;
 
       this.animations.add('expand', [0,1,2,3], 20, false);
       this.animations.add('sparkle', [2,3,4,5,6], 20, true);
