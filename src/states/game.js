@@ -69,6 +69,10 @@ class Game extends Phaser.State {
         dinoAmmo = 0;
         chickenCount = 5;
 
+        //make sure to reset arrays in case the game gets replayed
+        chickens = [];
+        laidEggs = [];
+        flyingEggs = [];
         for (let i =0; i<chickenCount; i++){
           var chicken = new Chicken(this.game, this.game.rnd.integerInRange(50, this.game.width-50), chickenLane, 0);
           console.log("chicken body " + chicken.body.x);
@@ -94,6 +98,18 @@ class Game extends Phaser.State {
     }
 
     update() {
+      if (inEndState){
+          if (this.game.TRexWon){
+            roswell.body.velocity.y  += 100
+            roswell.angle = Math.sin(this.game.time.time * 1/10) * 5
+          }
+          if (this.game.UFOWon){
+            roswell.body.velocity.y  -= 10
+            roswell.angle = Math.sin(this.game.time.time * 1/10) * 5
+          }
+
+      }
+
       for (const egg of flyingEggs) {
         this.game.physics.arcade.collide(roswell, egg, this.collisionHandler, null, this)
       //  this.game.physics.arcade.collide(gordie, egg, this.pickupCollisionHandler, null, this)
