@@ -228,11 +228,11 @@ queueEgg(eggCount) {
 
       abductionCollisionHandler(roswell, abductedchicken){
 
-          if (inEndState){return;}
+          if (inEndState || abductedchicken.body==null ){return;}
 
           for (let i=chickens.length-1; i>=0; i--){
             let chicken = chickens[i];
-            if (chicken.isAbducting && chicken.body.x == abductedchicken.body.x &&
+            if (chicken.isAbducting && chicken.body !=null && abductedchicken.body !=null && chicken.body.x == abductedchicken.body.x &&
                 chicken.body.y == abductedchicken.body.y){
               roswell.body.velocity.y=0; //don't push the chicken away
               chicken.destroy();
