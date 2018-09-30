@@ -27,7 +27,7 @@ var chickenCount;
 var eggCount;
 var dinoAmmo;
 var inEndState;
-const PotentialAmmoLimit = 5;
+const EggLimit = 2;
 
 class Game extends Phaser.State {
 
@@ -72,8 +72,7 @@ class Game extends Phaser.State {
           var chicken = new Chicken(this.game, this.game.rnd.integerInRange(50, this.game.width-50), chickenLane, 0);
           chickens.push(chicken);
         }
-        eggCount = 5;
-        this.queueEgg(eggCount);
+        this.queueEgg(EggLimit);
 
 
         eggHitLimit = 5;
@@ -180,8 +179,8 @@ queueEgg(eggCount) {
   }
 
   CanSpawnMoreEggs(){
-    console.log("can we spawn eggs? " + laidEggs.length + " on ground, " + dinoAmmo + " ammo, limit " + PotentialAmmoLimit)
-    return (laidEggs.length + dinoAmmo < PotentialAmmoLimit)
+    console.log("can we spawn eggs? " + laidEggs.length + " on ground, " + dinoAmmo + " ammo, limit " + EggLimit)
+    return (laidEggs.length + dinoAmmo < EggLimit)
 
   }
 
