@@ -86,7 +86,7 @@ class Game extends Phaser.State {
         game.global.input.bindOnDown('two', 'a', this.abductChicken, this)
         game.global.input.bindOnDown('one', 'b', this.throwEgg, this)
         game.global.input.bindOnDown('two', 'b', this.abductChicken, this)
-        this.input.onDown.add(this.endGame, this);
+        //this.input.onDown.add(this.endGame, this);
         game.time.events.loop(1000,this.ChickenMakeDecision,this);
 
 
@@ -243,7 +243,11 @@ queueEgg(eggCount) {
       for(const chicken of chickens){
         let action = game.math.roundTo(this.game.rnd.integerInRange(1,10), 0)
         chicken.ChangeDirection(action);
-        if (action==10 && this.CanSpawnMoreEggs() && chicken.body.y == chicken.groundLevely){
+
+        let chickenroll = action==10 || (chickens.length <=2 && laidEggs.length + dinoAmmo ==0 && (action >=5 || action <=7));
+
+
+        if (chickenroll && this.CanSpawnMoreEggs() && chicken.body.y == chicken.groundLevely){
           console.log("Chicken laid egg")
           var egg = new LaidEgg(this.game, chicken.body.x, playerLaneY, 0);
           laidEggs.push(egg);
