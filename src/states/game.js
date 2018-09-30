@@ -75,9 +75,7 @@ class Game extends Phaser.State {
         flyingEggs = [];
         for (let i =0; i<chickenCount; i++){
           var chicken = new Chicken(this.game, this.game.rnd.integerInRange(50, this.game.width-50), chickenLane, 0);
-          console.log("chicken body " + chicken.body.x);
           chickens.push(chicken);
-          console.log("number of chickens: " + chickens.length);
         }
         eggCount = 5;
         this.queueEgg(eggCount);
@@ -143,7 +141,6 @@ class Game extends Phaser.State {
 
       if (needToDestroyBeam && UFObeam !=null){
         UFObeam.stopBeam();
-        UFObeam.visible = false;
       }
 
 
@@ -206,6 +203,7 @@ queueEgg(eggCount) {
     abductChicken(){
       if (inEndState){return;}
 
+      let abductionValid = false;
       for(const chicken of chickens){
         console.log("chicken info:" + chicken);
         if ((roswell.body.x  < chicken.body.x) &&
@@ -213,14 +211,19 @@ queueEgg(eggCount) {
          {
            chicken.isAbducting = true;
            this.addAbductionBeam();
+           abductionValid = true;
          }
+      }
+
+      if (!abductionValid){
+        UFObeam.fizzleBeam();
+
       }
 
     }
 
     addAbductionBeam(){
       console.log("adding beam");
-      UFObeam.visible = true;
       UFObeam.expandBeam();
       //game.time.events.add(Phaser.Timer.SECOND * 3, this.finishAbduction, this);
     }
@@ -228,11 +231,11 @@ queueEgg(eggCount) {
 
       abductionCollisionHandler(roswell, abductedchicken){
 
-          if (inEndState){return;}
+          if (inEndState || abductedchicken.body==null ){return;}
 
           for (let i=chickens.length-1; i>=0; i--){
             let chicken = chickens[i];
-            if (chicken.isAbducting && chicken.body.x == abductedchicken.body.x &&
+            if (chicken.isAbducting && chicken.body !=null && abductedchicken.body !=null && chicken.body.x == abductedchicken.body.x &&
                 chicken.body.y == abductedchicken.body.y){
               roswell.body.velocity.y=0; //don't push the chicken away
               chicken.destroy();
