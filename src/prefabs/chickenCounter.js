@@ -4,16 +4,22 @@ const decimalPlacesToShow = 1
 
 class ChickenCounter extends Phaser.Text {
 
-  constructor(game) {
+  constructor(game, maxChickens) {
     super(game, 0, 0, '', style)
-    //this.timer = timer
-    this.text = "🐓 3/3"
+    //this.timer = timesr
     this.fontSize = 32
+    this.maxChickens = maxChickens;
+    this.updateCount(this.maxChickens);
     //this.anchor.setTo(1, 0)
     game.add.existing(this)
     //🐣
     //🥚
   }
+
+
+    updateCount(newcount){
+      this.text = "🐓" + newcount + "/" + this.maxChickens;
+    }
 
   update() {
     // const timeLeft = (this.timer.duration / Phaser.Timer.SECOND).toFixed(decimalPlacesToShow)

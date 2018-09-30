@@ -80,7 +80,7 @@ class Game extends Phaser.State {
         eggHitLimit = 5;
         eggHitCounter = 0;
         this.eggedCounter = new EggedCounter(this.game, eggHitLimit)
-        this.chickenCounter = new ChickenCounter(this.game)
+        this.chickenCounter = new ChickenCounter(this.game, chickenCount)
         this.AmmoEggCounter = new AmmoEggCounter(this.game)
 
         game.global.input.bindOnDown('one', 'a', this.throwEgg, this)
@@ -199,6 +199,7 @@ queueEgg(eggCount) {
           console.log("destroyed chicken");
           chicken.destroy();
           chickens.splice(i,1);
+          this.chickenCounter.updateCount(chickens.length);
         }
       }
 
