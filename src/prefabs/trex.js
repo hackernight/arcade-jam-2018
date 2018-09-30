@@ -10,8 +10,8 @@ class TRex extends Phaser.Sprite {
 
   //initialization code in the constructor
   constructor(game, y, frame) {
-      y = y - (SPRITE_SIZE / 2)
-      y = y + 300
+      //y = y - (SPRITE_SIZE / 2)
+      //y = y + 300
       super(game, SPRITE_SIZE, y, 'gordon', frame);
       console.log("I AM GORDON, HEAR ME RAWR")
       game.physics.enable(this, Phaser.Physics.ARCADE);
@@ -22,8 +22,8 @@ class TRex extends Phaser.Sprite {
 
 
 
-      this.animations.add('run', [0,1,2,3,4,5,6], 20, false);
-      this.animations.add('build', [8,9,10,11,12,13,14,15,8,9,10,11,12,13,14,15], 30, false);
+      this.animations.add('run', [0,1,2,3,4,5,6,7], 20, false);
+      this.animations.add('build', [8,9,10,11,12,13,14,15], 30, false);
       //this.walkingSound = this.game.add.audio('walking')
       //this.walkingSound.volume = .3
       //this.digging = this.game.add.audio('digging')
