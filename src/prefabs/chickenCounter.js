@@ -18,7 +18,7 @@ class ChickenCounter extends Phaser.Text {
 
 
     updateCount(newcount){
-      this.text = "🐓" + newcount + "/" + this.maxChickens;
+      this.text = "🐓" + newcount + " / " + this.maxChickens;
     }
 
   update() {

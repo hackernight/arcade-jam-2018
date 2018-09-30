@@ -7,7 +7,7 @@ class AmmoEggCounter extends Phaser.Text {
   constructor(game) {
     super(game, 0, 50, '', style)
     //this.timer = timer
-    this.text = "🥚 0 of 2"
+    this.text = "🥚 0 / 2"
     this.fontSize = 32
     //this.anchor.setTo(1, 0)
     game.add.existing(this)
@@ -17,7 +17,7 @@ class AmmoEggCounter extends Phaser.Text {
 
 
     updateCount(newcount){
-      this.text = "🥚 " + newcount + " of 2";
+      this.text = "🥚 " + newcount + " / 2";
     }
 
   update() {

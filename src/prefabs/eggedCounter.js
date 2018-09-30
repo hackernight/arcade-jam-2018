@@ -17,7 +17,7 @@ class EggedCounter extends Phaser.Text {
   }
 
   updateCount(newcount){
-    this.text = "🍳" + newcount + "/" + this.eggLimit;
+    this.text = "🍳" + newcount + " / " + this.eggLimit;
   }
 
   update() {
