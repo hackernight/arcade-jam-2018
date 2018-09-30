@@ -1,4 +1,6 @@
 const CenteredText = require('../prefabs/CenteredText');
+const FlashingText = require('../prefabs/FlashingText');
+
 
 class Menu extends Phaser.State {
 
@@ -30,6 +32,12 @@ class Menu extends Phaser.State {
         });
         text.anchor.set(0.5);
 
+        new FlashingText(this.game, this.game.world.centerX, this.game.height, 'Press to continue')
+
+        this.game.global.input.bindOnDown('one', 'a', this.startGame, this)
+        this.game.global.input.bindOnDown('one', 'b', this.startGame, this)
+        this.game.global.input.bindOnDown('two', 'a', this.startGame, this)
+        this.game.global.input.bindOnDown('two', 'b', this.startGame, this)
         this.input.onDown.add(this.startGame, this);
     }
 

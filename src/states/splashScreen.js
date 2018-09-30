@@ -1,4 +1,6 @@
 const CenteredSprite = require('../prefabs/centeredSprite');
+const FlashingText = require('../prefabs/FlashingText');
+
 
 class SplashScreen extends Phaser.State {
 
@@ -8,7 +10,6 @@ class SplashScreen extends Phaser.State {
 
     loadResources() {
         // load your resources here
-        console.log('loading actual resources');
         this.game.load.spritesheet('gordon', 'assets/trex.png', 128, 64)
         this.game.load.spritesheet('roswell', 'assets/ufo.png', 256, 128)
         this.game.load.spritesheet('eggie', 'assets/egg.png', 32, 32)
@@ -102,8 +103,6 @@ class SplashScreen extends Phaser.State {
     }
 
     onLoadComplete() {
-      console.log('loading done, should be able to move forward now');
-      console.log(this.game.cache);
         this.game.global.input.bindOnDown('one', 'a', this.moveToNextState, this)
         this.game.global.input.bindOnDown('one', 'b', this.moveToNextState, this)
         this.game.global.input.bindOnDown('two', 'a', this.moveToNextState, this)
@@ -111,6 +110,7 @@ class SplashScreen extends Phaser.State {
 
         // mouse click for ezpz testing
         this.input.onDown.add(this.moveToNextState, this);
+        new FlashingText(this.game, this.game.world.centerX, this.game.height, 'Press to continue')
     }
 }
 

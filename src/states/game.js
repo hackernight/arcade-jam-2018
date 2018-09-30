@@ -43,12 +43,6 @@ class Game extends Phaser.State {
       console.log("here 0")
         new Background(this.game)
 
-        const text = this.add.text(this.game.width * 0.5, this.game.height * 0.5, 'Game', {
-            font: '42px Arcade',
-            fill: '#ffffff',
-            align: 'center'
-        });
-        text.anchor.set(0.5);
         inEndState = false;
 
         var height = this.game.height
