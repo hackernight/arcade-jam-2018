@@ -208,7 +208,10 @@ queueEgg(eggCount) {
         gordie.throwEggAnimation();
         dinoAmmo--;
         this.AmmoEggCounter.updateCount(dinoAmmo);
-        const flyingEgg = new ThrownEgg(this.game, gordie.x + 64, gordie.y);
+        const flyingEgg = new ThrownEgg(
+          this.game,
+          gordie.x + (64 * (gordie.facing == 'left' ? -1 : 1)),
+          gordie.y);
        flyingEggs.push(flyingEgg);
      }
     }
