@@ -76,14 +76,14 @@ class Chicken extends Phaser.Sprite {
   update() {
 
     //if being abducted, we rise
-    if (this.isAbducting && this.body.velocity.y > -200){
-      this.body.velocity.y -= 10;
+    if (this.isAbducting && this.body.velocity.y > -(this.game.height*.75)){
+      this.body.velocity.y -= this.game.height/400;
 
     }
     //console.log("chicken body y: " + this.body.y  + "chicken groundlevely: " + this.groundLevely)
     //  if we're above the ground, we fall
     if (!this.isAbducting && this.body.y < this.groundLevely){
-      this.body.velocity.y += 20;
+      this.body.velocity.y += this.game.height/100;
     }
     //  if we've hit the ground, we stop
     if (!this.isAbducting && this.body.velocity.y !=0 && this.body.y >= this.groundLevely){

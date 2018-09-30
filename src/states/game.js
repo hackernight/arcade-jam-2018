@@ -107,17 +107,16 @@ class Game extends Phaser.State {
 
       }
 
-
         if (!inEndState){
           for (const egg of flyingEggs) {
-          this.game.physics.arcade.collide(roswell, egg, this.collisionHandler, null, this)
+          this.game.physics.arcade.overlap(roswell, egg, this.collisionHandler, null, this)
           //  this.game.physics.arcade.collide(gordie, egg, this.pickupCollisionHandler, null, this)
           }
           for (const egg of laidEggs) {
-          this.game.physics.arcade.collide(gordie, egg, this.pickupCollisionHandler, null, this)
+          this.game.physics.arcade.overlap(gordie, egg, this.pickupCollisionHandler, null, this)
           }
           for (const chicken of chickens) {
-          this.game.physics.arcade.collide(roswell, chicken, this.abductionCollisionHandler, null, this)
+          this.game.physics.arcade.overlap(roswell, chicken, this.abductionCollisionHandler, null, this)
           }
         }
 
@@ -218,7 +217,8 @@ queueEgg(eggCount) {
         const flyingEgg = new ThrownEgg(
           this.game,
           gordie.x + (64 * (gordie.facing == 'left' ? -1 : 1)),
-          gordie.y);
+          gordie.y,
+          50);
        flyingEggs.push(flyingEgg);
      }
     }
