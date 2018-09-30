@@ -35,7 +35,7 @@ class Chicken extends Phaser.Sprite {
 
   ChangeDirection(action){
 
-    if (action==1){
+    if (action>=1 && action<=2){
       //change direction
         if (this.body.velocity.x==0){
           if (this.scale.x < 0){
@@ -48,11 +48,11 @@ class Chicken extends Phaser.Sprite {
         this.body.velocity.x=this.body.velocity.x * -1;
         this.scale.x *= -1;
     }
-    if (action==2){
+    if (action>=3 && action <=4){
       //stop
       this.body.velocity.x = 0;
     }
-    if (action==3){
+    if (action >=5 && action <=8){
       //resume/continue in the direction you were going
       if (this.body.velocity.x==0){
         if (this.scale.x < 0){

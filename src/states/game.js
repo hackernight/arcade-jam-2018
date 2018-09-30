@@ -27,6 +27,7 @@ var chickenCount;
 var eggCount;
 var dinoAmmo;
 var inEndState;
+const PotentialAmmoLimit = 5;
 
 class Game extends Phaser.State {
 
@@ -178,10 +179,23 @@ queueEgg(eggCount) {
     }
   }
 
+  CanSpawnMoreEggs(){
+    console.log("can we spawn eggs? " + laidEggs.length + " on ground, " + dinoAmmo + " ammo, limit " + PotentialAmmoLimit)
+    return (laidEggs.length + dinoAmmo < PotentialAmmoLimit)
+
+  }
+
   pickupCollisionHandler(gordie, egg){
     dinoAmmo++;
     this.AmmoEggCounter.updateCount(dinoAmmo);
-    egg.destroy();
+    for (let i=laidEggs.length-1; i>=0; i--){
+      let myegg = laidEggs[i];
+      if (myegg.body !=null && egg.body !=null && myegg.body.x == egg.body.x &&
+          myegg.body.y == egg.body.y){
+        egg.destroy();
+        laidEggs.splice(i,1);
+      }
+    }
   }
 
     throwEgg(){
@@ -221,8 +235,13 @@ queueEgg(eggCount) {
     ChickenMakeDecision(){
 
       for(const chicken of chickens){
-        let action = game.math.roundTo(this.game.rnd.integerInRange(1,3), 0)
+        let action = game.math.roundTo(this.game.rnd.integerInRange(1,10), 0)
         chicken.ChangeDirection(action);
+        if (action==10 && this.CanSpawnMoreEggs() && chicken.body.y == chicken.groundLevely){
+          console.log("Chicken laid egg")
+          var egg = new LaidEgg(this.game, chicken.body.x, playerLaneY, 0);
+          laidEggs.push(egg);
+        }
       }
 
     }
