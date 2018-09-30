@@ -45,7 +45,7 @@ class Game extends Phaser.State {
         text.anchor.set(0.5);
 
         var height = this.game.height
-        playerLaneY = (height / 3) + 64 * 2.5
+        playerLaneY = height - 50;
         playerLaneY2 = (height / 3) + 32 * 2.5
         chickenLane = 700; //need to change this later
 
@@ -123,7 +123,7 @@ class Game extends Phaser.State {
 queueEgg(eggCount) {
 
   for (let i =0; i<eggCount; i++){
-    var egg = new LaidEgg(this.game, this.game.rnd.integerInRange(50, this.game.width-50), chickenLane, 0);
+    var egg = new LaidEgg(this.game, this.game.rnd.integerInRange(50, this.game.width-50), playerLaneY, 0);
     laidEggs.push(egg);
     console.log("number of eggs: " + laidEggs.length);
   }
