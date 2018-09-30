@@ -24,7 +24,7 @@ class Menu extends Phaser.State {
         const text = this.add.text(this.game.world.centerX, this.game.height * 0.6,
           "T-Rex 🦖: throw your eggs 🥚 at the UFO 🛸\n\nUFO 🛸: catch 🎐 all the chickens 🐓"
           , {
-            font: '30px Gameplay',
+            font: '30px Emoji',
             fill: '#ffffff',
             align: 'center',
             wordWrap: true,

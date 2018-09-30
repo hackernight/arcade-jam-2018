@@ -28,3 +28,8 @@ canvas {
     font-family: 'Gameplay';
     src: local('☺'), url('../assets/fonts/Gameplay.ttf') format('truetype');
 }
+
+@font-face {
+    font-family: 'Emoji';
+    src: local('☺'), url('../assets/fonts/NotoColorEmoji.ttf') format('truetype');
+}
