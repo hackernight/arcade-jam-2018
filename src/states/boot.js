@@ -9,7 +9,7 @@ class Boot extends Phaser.State {
 
         this.game.scale.pageAlignHorizontally = true;
 
-        this.initializeFonts(['BirdFeather', 'Dino', 'Arcade'])
+        this.initializeFonts(['BirdFeather', 'Dino', 'Arcade', 'Gameplay'])
         this.initGlobalVariables();
         this.game.global.input.bindQuit()
 

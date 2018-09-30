@@ -1,5 +1,5 @@
 const style = {
-  font: '42px Arcade',
+  font: '42px Gameplay',
   fill: '#ffffff',
   align: 'center',
   stroke: 'black',

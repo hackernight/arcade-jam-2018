@@ -23,3 +23,8 @@ canvas {
     font-family: 'Arcade';
     src: local('☺'), url('../assets/fonts/ka1.ttf') format('truetype');
 }
+
+@font-face {
+    font-family: 'Gameplay';
+    src: local('☺'), url('../assets/fonts/Gameplay.ttf') format('truetype');
+}
