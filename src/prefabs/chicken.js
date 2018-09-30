@@ -63,6 +63,9 @@ class Chicken extends Phaser.Sprite {
         }
       }
     }
+    if (action==9){
+      this.body.velocity.x = this.body.velocity.x * 2;
+    }
 
 
   }
