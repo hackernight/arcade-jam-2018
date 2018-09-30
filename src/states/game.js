@@ -106,7 +106,7 @@ class Game extends Phaser.State {
 
       }
 
-      
+
         if (!inEndState){
           for (const egg of flyingEggs) {
           this.game.physics.arcade.collide(roswell, egg, this.collisionHandler, null, this)
@@ -207,7 +207,7 @@ queueEgg(eggCount) {
         gordie.throwEggAnimation();
         dinoAmmo--;
         this.AmmoEggCounter.updateCount(dinoAmmo);
-        const flyingEgg = new ThrownEgg(this.game, gordie.x, gordie.y);
+        const flyingEgg = new ThrownEgg(this.game, gordie.x + 64, gordie.y);
        flyingEggs.push(flyingEgg);
      }
     }
