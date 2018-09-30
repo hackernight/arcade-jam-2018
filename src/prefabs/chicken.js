@@ -1,15 +1,17 @@
 const SPRITE_SIZE=128;
-const MAX_VELOCITY = 250;
+const MAX_VELOCITY = 50;
 const ACCELERATION = 25;
-var current_speed = -400;
+var current_speed = -100;
+
+var isBeingAbducted = false;
 
 //Documentation for Phaser's (2.6.2) sprites:: phaser.io/docs/2.6.2/Phaser.Sprite.html
 class Chicken extends Phaser.Sprite {
 
   //initialization code in the constructor
   constructor(game, x, y, frame) {
-    y =700;
-    x = 500;
+    //y =700;
+    //x = 500;
 
     super(game, x, y, 'chicken', frame);
     console.log("I AM CHICK-CHICK-CHICKEN!")
