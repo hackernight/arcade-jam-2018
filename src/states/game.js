@@ -26,6 +26,7 @@ var UFObeam;
 var chickenCount;
 var eggCount;
 var dinoAmmo;
+var inEndState;
 
 class Game extends Phaser.State {
 
@@ -48,6 +49,7 @@ class Game extends Phaser.State {
             align: 'center'
         });
         text.anchor.set(0.5);
+        inEndState = false;
 
         var height = this.game.height
         playerLaneY = height - 50;
@@ -126,6 +128,7 @@ class Game extends Phaser.State {
     }
 
 queueEgg(eggCount) {
+  if (inEndState){return;}
 
   for (let i =0; i<eggCount; i++){
     var egg = new LaidEgg(this.game, this.game.rnd.integerInRange(50, this.game.width-50), playerLaneY, 0);
@@ -135,6 +138,8 @@ queueEgg(eggCount) {
 }
 
   collisionHandler(roswell, egg) {
+    if (inEndState){return;}
+
     egg.body.enable = false;
     egg.splatter();
 
@@ -164,6 +169,8 @@ queueEgg(eggCount) {
   }
 
     throwEgg(){
+      if (inEndState){return;}
+
       if (dinoAmmo > 0){
         gordie.throwEggAnimation();
         dinoAmmo--;
@@ -174,6 +181,8 @@ queueEgg(eggCount) {
     }
 
     abductChicken(){
+      if (inEndState){return;}
+
       for(const chicken of chickens){
         console.log("chicken info:" + chicken);
         if ((roswell.body.x  < chicken.body.x) &&
@@ -194,6 +203,8 @@ queueEgg(eggCount) {
     }
 
     finishAbduction(){
+      if (inEndState){return;}
+
       for (let i=chickens.length-1; i>=0; i--){
         let chicken = chickens[i];
         if (chicken.isAbducting ){
@@ -214,7 +225,13 @@ queueEgg(eggCount) {
     }
 
     endGame() {
-        this.game.state.start('gameover');
+        inEndState = true;
+        const timer = this.game.time.create(false)
+        timer.add(Phaser.Timer.SECOND * 1.5, () => {
+          this.game.state.start('gameover');
+        })
+        timer.start();
+
     }
 
 }
