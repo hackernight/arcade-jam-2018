@@ -57,7 +57,7 @@ class Game extends Phaser.State {
         chickenLane = 700; //need to change this later
 
         gordie = new TRex(this.game, playerLaneY, 0);
-        roswell = new UFO(this.game, playerLaneY2, 0);
+        roswell = new UFO(this.game, this.game.width - 100, playerLaneY2, 0);
 
         UFObeam = new AbductionBeam(this.game, playerLaneY, 0, roswell.width);
         roswell.addChild(UFObeam);
@@ -91,6 +91,8 @@ class Game extends Phaser.State {
 
         game.global.input.bindOnDown('one', 'a', this.throwEgg, this)
         game.global.input.bindOnDown('two', 'a', this.abductChicken, this)
+        game.global.input.bindOnDown('one', 'b', this.throwEgg, this)
+        game.global.input.bindOnDown('two', 'b', this.abductChicken, this)
         this.input.onDown.add(this.endGame, this);
 
         this.game.TRexWon = false;
