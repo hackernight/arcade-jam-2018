@@ -1,5 +1,5 @@
 const SPRITE_SIZE=128;
-const MAX_SPEED = -600;
+const MAX_SPEED = -700;
 const ACCELERATION = 5;
 
 
