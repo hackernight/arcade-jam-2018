@@ -1,5 +1,5 @@
 const SPRITE_SIZE=128;
-const MAX_VELOCITY = 275;
+const MAX_VELOCITY = 280;
 const ACCELERATION = 25;
 var space;
 

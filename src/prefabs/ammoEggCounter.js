@@ -5,7 +5,7 @@ const decimalPlacesToShow = 1
 class AmmoEggCounter extends Phaser.Text {
 
   constructor(game) {
-    super(game, 0, 50, '', style)
+    super(game, 0, (game.height) - 172, '', style)
     //this.timer = timer
     this.text = "🥚 0 / 2"
     this.fontSize = 32

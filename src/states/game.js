@@ -152,7 +152,7 @@ queueEgg(eggCount) {
   if (inEndState){return;}
 
   for (let i =0; i<eggCount; i++){
-    var egg = new LaidEgg(this.game, this.game.rnd.integerInRange(50, this.game.width-50), playerLaneY, 0);
+    var egg = new LaidEgg(this.game, this.game.rnd.integerInRange(50, this.game.width-50), playerLaneY, playerLaneY);
     laidEggs.push(egg);
     console.log("number of eggs: " + laidEggs.length);
   }
@@ -203,6 +203,7 @@ queueEgg(eggCount) {
   }
 
   pickupCollisionHandler(gordie, egg){
+    gordie.body.velocity.y=0;
     dinoAmmo++;
     this.AmmoEggCounter.updateCount(dinoAmmo);
     for (let i=laidEggs.length-1; i>=0; i--){
@@ -260,8 +261,7 @@ queueEgg(eggCount) {
         let action = game.math.roundTo(this.game.rnd.integerInRange(1,10), 0)
 
         let chickenLaysEgg = action==3 ||
-                 (laidEggs.length + dinoAmmo ==0 && (action >=3 || action <=4)) ||
-                (chickens.length <=2 && laidEggs.length + dinoAmmo <0 && (action >=3 || action <=5));
+                (chickens.length <=2 && laidEggs.length + dinoAmmo <0 && (action >=3 || action <=4));
 
         //if being abducted, chicken is probably going to settle down
         if (chicken.isAbducting && action<3){action = 4;}
@@ -270,9 +270,9 @@ queueEgg(eggCount) {
 
         chicken.ChangeDirection(action);
 
-        if (chickenLaysEgg && this.CanSpawnMoreEggs() && chicken.body.y == chicken.groundLevely){
-          console.log("Chicken laid egg")
-          var egg = new LaidEgg(this.game, chicken.body.x, playerLaneY, 0);
+        if (chickenLaysEgg && this.CanSpawnMoreEggs()){
+          console.log("Chicken laid egg height " + chicken.body.y)
+          var egg = new LaidEgg(this.game, chicken.body.x, chicken.body.y, playerLaneY);
           laidEggs.push(egg);
         }
       }

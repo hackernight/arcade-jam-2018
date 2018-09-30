@@ -8,11 +8,12 @@ const ACCELERATION = 5;
 class LaidEgg extends Phaser.Sprite {
 
   //initialization code in the constructor
-  constructor(game, x, y) {
+  constructor(game, x, y, eggLane) {
       super(game, x, y, 'egg', 0);
       game.physics.enable(this, Phaser.Physics.ARCADE);
       this.frame = 0;
       game.add.existing(this);
+      this.eggLane = eggLane;
       //this.body.velocity.y = MAX_SPEED;
       // Set Anchor to the center of your sprite
       this.anchor.setTo(.5);
@@ -31,7 +32,13 @@ class LaidEgg extends Phaser.Sprite {
 
   //Code ran on each frame of game
   update() {
-
+    if (this.body.y < this.eggLane){
+      this.body.velocity.y += 10;
+    }
+    else {
+      this.body.velocity.y = 0;
+      this.body.y = this.eggLane;
+    }
   }
 
 
