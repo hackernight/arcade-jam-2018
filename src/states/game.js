@@ -165,6 +165,7 @@ queueEgg(eggCount) {
 
     throwEgg(){
       if (dinoAmmo > 0){
+        gordie.throwEggAnimation();
         dinoAmmo--;
         this.AmmoEggCounter.updateCount(dinoAmmo);
         const flyingEgg = new ThrownEgg(this.game, gordie.x, gordie.y);

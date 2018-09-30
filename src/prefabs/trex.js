@@ -23,7 +23,7 @@ class TRex extends Phaser.Sprite {
 
 
       this.animations.add('run', [0,1,2,3,4,5,6,7], 20, false);
-      this.animations.add('build', [8,9,10,11,12,13,14,15], 30, false);
+      this.animations.add('throw', [8,9,10,11,12,13,14,15], 20, false);
       //this.walkingSound = this.game.add.audio('walking')
       //this.walkingSound.volume = .3
       //this.digging = this.game.add.audio('digging')
@@ -32,8 +32,8 @@ class TRex extends Phaser.Sprite {
       this.scale.x *= -1;
   }
 
-  throwEgg(){
-    this.game.throwEgg(this.x, this.y)
+  throwEggAnimation(){
+    this.animations.play('throw');
     //const egg = new ThrownEgg(game, );
   }
 
