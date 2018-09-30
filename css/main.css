@@ -8,3 +8,18 @@ canvas {
   display: block;
   cursor: none;
 }
+
+@font-face {
+    font-family: 'BirdFeather';
+    src: local('☺'), url('../assets/fonts/BirdFeather.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Dino';
+    src: local('☺'), url('../assets/fonts/dinojp__.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Arcade';
+    src: local('☺'), url('../assets/fonts/ka1.ttf') format('truetype');
+}

@@ -1,3 +1,7 @@
+const CenteredText = require('../prefabs/CenteredText');
+const FlashingText = require('../prefabs/FlashingText');
+
+
 class Menu extends Phaser.State {
 
     init() {
@@ -10,10 +14,17 @@ class Menu extends Phaser.State {
 
     create() {
         game.stage.backgroundColor = "#213ad1";
-        const text = this.add.text(this.game.width * 0.5, this.game.height * 0.5,
+
+        // Title
+        new CenteredText(this.game, this.game.height * 0.10, 'An', {fontSize: '50px', font: 'Arcade'})
+        new CenteredText(this.game, this.game.height * 0.15, 'Abduction', {fontSize: '50px', font: 'Arcade'})
+        new CenteredText(this.game, this.game.height * 0.20, 'Most', {fontSize: '50px', font: 'Arcade'})
+        new CenteredText(this.game, this.game.height * 0.28, 'Fowl', {fontSize: '150px', font: 'BirdFeather'})
+
+        const text = this.add.text(this.game.world.centerX, this.game.height * 0.6,
           "T-Rex 🦖: throw your eggs 🥚 at the UFO 🛸\n\nUFO 🛸: catch 🎐 all the chickens 🐓"
           , {
-            font: '42px Arial',
+            font: '30px Arcade',
             fill: '#ffffff',
             align: 'center',
             wordWrap: true,
@@ -21,6 +32,12 @@ class Menu extends Phaser.State {
         });
         text.anchor.set(0.5);
 
+        new FlashingText(this.game, this.game.world.centerX, this.game.height, 'Press to continue')
+
+        this.game.global.input.bindOnDown('one', 'a', this.startGame, this)
+        this.game.global.input.bindOnDown('one', 'b', this.startGame, this)
+        this.game.global.input.bindOnDown('two', 'a', this.startGame, this)
+        this.game.global.input.bindOnDown('two', 'b', this.startGame, this)
         this.input.onDown.add(this.startGame, this);
     }
 

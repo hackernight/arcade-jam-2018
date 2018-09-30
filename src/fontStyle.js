@@ -1,5 +1,5 @@
 const style = {
-  font: '42px Arial',
+  font: '42px Arcade',
   fill: '#ffffff',
   align: 'center',
   stroke: 'black',
