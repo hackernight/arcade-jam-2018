@@ -74,7 +74,7 @@ class SplashScreen extends Phaser.State {
 
     showJ2FText() {
         const style = {
-            font: '42px Arcade',
+            font: '42px Gameplay',
             fill: '#ffffff',
             stroke: 0x333333,
             strokeThickness: 5,
