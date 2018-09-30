@@ -51,7 +51,7 @@ class Game extends Phaser.State {
         playerLaneY2 = (height / 3) + 32 * 2.5
         chickenLane = playerLaneY - 50; //need to change this later
 
-        gordie = new TRex(this.game, playerLaneY, 0);
+        gordie = new TRex(this.game, playerLaneY- 50, 0);
         roswell = new UFO(this.game, this.game.width - 100, playerLaneY2, 0);
 
         UFObeam = new AbductionBeam(this.game, playerLaneY, 0, roswell.width);
