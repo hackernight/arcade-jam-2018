@@ -54,7 +54,7 @@ class Game extends Phaser.State {
         var height = this.game.height
         playerLaneY = height - 50;
         playerLaneY2 = (height / 3) + 32 * 2.5
-        chickenLane = 700; //need to change this later
+        chickenLane = playerLaneY - 50; //need to change this later
 
         gordie = new TRex(this.game, playerLaneY, 0);
         roswell = new UFO(this.game, this.game.width - 100, playerLaneY2, 0);

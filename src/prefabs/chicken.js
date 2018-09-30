@@ -3,8 +3,6 @@ const MAX_VELOCITY = 50;
 const ACCELERATION = 25;
 var current_speed = -100;
 
-var isAbducting = false;
-
 //Documentation for Phaser's (2.6.2) sprites:: phaser.io/docs/2.6.2/Phaser.Sprite.html
 class Chicken extends Phaser.Sprite {
 
@@ -17,12 +15,14 @@ class Chicken extends Phaser.Sprite {
     console.log("I AM CHICK-CHICK-CHICKEN!")
       //super(game, x, y, 'chicken');
       game.physics.enable(this, Phaser.Physics.ARCADE);
+      this.isAbducting = false;
       //this.frame = 0;
       game.add.existing(this);
 
 
+      //this.anchor.setTo(.5);
+      this.groundLevely = this.body.y;
       // Set Anchor to the center of your sprite
-      this.anchor.setTo(.5);
       this.body.velocity.x = current_speed
       //this.walkingSound = this.game.add.audio('walking')
       //this.walkingSound.volume = .3
@@ -36,6 +36,22 @@ class Chicken extends Phaser.Sprite {
 
   //Code ran on each frame of game
   update() {
+
+  //if being abducted, we rise
+  if (this.isAbducting && this.body.velocity.y > -100){
+    this.body.velocity.y -= 5;
+
+  }
+  //console.log("chicken body y: " + this.body.y  + "chicken groundlevely: " + this.groundLevely)
+//  if we're above the ground, we fall
+  if (!this.isAbducting && this.body.y < this.groundLevely){
+    this.body.velocity.y += 20;
+  }
+//  if we've hit the ground, we stop
+  if (!this.isAbducting && this.body.velocity.y !=0 && this.body.y >= this.groundLevely){
+    this.body.velocity.y = 0;
+    this.body.y = this.groundLevely;
+  }
 
   if (this.right < 0 ){
     this.body.velocity.x = current_speed * -1
