@@ -163,6 +163,13 @@ queueEgg(eggCount) {
     egg.body.enable = false;
     egg.splatter();
 
+    for(const chicken of chickens){
+      chicken.isAbducting = false;
+    }
+
+    UFObeam.stopBeam();
+
+
     // make egg move with Roswell
     egg.body.velocity.y = 0;
     roswell.addChild(egg);
