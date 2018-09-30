@@ -4,11 +4,14 @@ const UFO = require('../prefabs/ufo');
 const EggedCounter = require('../prefabs/eggedCounter')
 const ChickenCounter = require('../prefabs/chickenCounter')
 const ThrownEgg = require('../prefabs/thrownEgg')
+const LaidEgg = require('../prefabs/laidEgg')
 const Chicken = require('../prefabs/chicken')
 const AbductionBeam = require('../prefabs/AbductionBeam')
+const AmmoEggCounter = require('../prefabs/ammoEggCounter')
 //const style = require('../fontStyle');
 
 var flyingEggs = [];
+var laidEggs = [];
 var chickens = [];
 var playerLaneY;
 var playerLaneY2;
@@ -20,6 +23,8 @@ var eggHitLimit;
 var isAbducting;
 var UFObeam;
 var chickenCount;
+var eggCount;
+var dinoAmmo;
 
 class Game extends Phaser.State {
 
@@ -46,6 +51,15 @@ class Game extends Phaser.State {
 
         gordie = new TRex(this.game, playerLaneY, 0);
         roswell = new UFO(this.game, playerLaneY2, 0);
+
+        UFObeam = new AbductionBeam(this.game, playerLaneY, 0, roswell.width);
+        roswell.addChild(UFObeam);
+        UFObeam.x=0;
+        UFObeam.y=0;
+        UFObeam.anchor.y = 0;
+        UFObeam.visible = false;
+
+        dinoAmmo = 0;
         chickenCount = 5;
 
         for (let i =0; i<chickenCount; i++){
@@ -54,11 +68,15 @@ class Game extends Phaser.State {
           chickens.push(chicken);
           console.log("number of chickens: " + chickens.length);
         }
+        eggCount = 5;
+        this.queueEgg(eggCount);
+
 
         eggHitLimit = 5;
         eggHitCounter = 0;
         this.eggedCounter = new EggedCounter(this.game, eggHitLimit)
         this.chickenCounter = new ChickenCounter(this.game)
+        this.AmmoEggCounter = new AmmoEggCounter(this.game)
 
         game.global.input.bindOnDown('one', 'a', this.throwEgg, this)
         game.global.input.bindOnDown('two', 'a', this.abductChicken, this)
@@ -71,23 +89,45 @@ class Game extends Phaser.State {
     update() {
       for (const egg of flyingEggs) {
         this.game.physics.arcade.collide(roswell, egg, this.collisionHandler, null, this)
+      //  this.game.physics.arcade.collide(gordie, egg, this.pickupCollisionHandler, null, this)
+      }
+      for (const egg of laidEggs) {
+        this.game.physics.arcade.collide(gordie, egg, this.pickupCollisionHandler, null, this)
       }
 
+      var needToDestroyBeam = true;
       for (const chicken of chickens){
         var EligibleToAbduct = (chicken != null && chicken.body != null && ((roswell.body.x  < chicken.body.x) &&
                (roswell.body.x + roswell.body.width) > (chicken.body.x + chicken.body.width)));
 
          if (chicken.isAbducting && !EligibleToAbduct){
            chicken.isAbducting = false;
-           UFObeam.destroy();
          }
 
+         if (chicken.isAbducting){
+           needToDestroyBeam = false;
+         }
+
+
+      }
+
+      if (needToDestroyBeam && UFObeam !=null){
+        UFObeam.stopBeam();
+        UFObeam.visible = false;
       }
 
 
 
     }
 
+queueEgg(eggCount) {
+
+  for (let i =0; i<eggCount; i++){
+    var egg = new LaidEgg(this.game, this.game.rnd.integerInRange(50, this.game.width-50), chickenLane, 0);
+    laidEggs.push(egg);
+    console.log("number of eggs: " + laidEggs.length);
+  }
+}
 
   collisionHandler(roswell, egg) {
     egg.body.enable = false;
@@ -112,9 +152,19 @@ class Game extends Phaser.State {
     }
   }
 
+  pickupCollisionHandler(gordie, egg){
+    dinoAmmo++;
+    this.AmmoEggCounter.updateCount(dinoAmmo);
+    egg.destroy();
+  }
+
     throwEgg(){
-      const flyingEgg = new ThrownEgg(this.game, gordie.x, gordie.y);
-     flyingEggs.push(flyingEgg);
+      if (dinoAmmo > 0){
+        dinoAmmo--;
+        this.AmmoEggCounter.updateCount(dinoAmmo);
+        const flyingEgg = new ThrownEgg(this.game, gordie.x, gordie.y);
+       flyingEggs.push(flyingEgg);
+     }
     }
 
     abductChicken(){
@@ -131,12 +181,8 @@ class Game extends Phaser.State {
     }
 
     addAbductionBeam(){
-
-      UFObeam = new AbductionBeam(this.game, playerLaneY, 0, roswell.width);
-      roswell.addChild(UFObeam);
-      UFObeam.x=0;
-      UFObeam.y=0;
-      UFObeam.anchor.y = 0;
+      console.log("adding beam");
+      UFObeam.visible = true;
       UFObeam.expandBeam();
       game.time.events.add(Phaser.Timer.SECOND * 3, this.finishAbduction, this);
     }
@@ -144,7 +190,7 @@ class Game extends Phaser.State {
     finishAbduction(){
       for (let i=chickens.length-1; i>=0; i--){
         let chicken = chickens[i];
-        if (chicken.isAbducting){
+        if (chicken.isAbducting ){
           console.log("destroyed chicken");
           chicken.destroy();
           chickens.splice(i,1);
