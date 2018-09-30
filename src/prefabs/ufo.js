@@ -17,7 +17,6 @@ class UFO extends Phaser.Sprite {
       this.anchor.setTo(.5);
 
       this.animations.add('run', [0,1,2,3,4,5,6], 20, false);
-      this.animations.add('build', [8,9,10,11,12,13,14,15,8,9,10,11,12,13,14,15], 30, false);
       //this.walkingSound = this.game.add.audio('walking')
       //this.walkingSound.volume = .3
       //this.digging = this.game.add.audio('digging')
@@ -29,10 +28,6 @@ class UFO extends Phaser.Sprite {
   //Code ran on each frame of game
   update() {
     this.bringToTop()
-    if (this.animations.currentAnim.name =="build" && this.animations.currentAnim.isPlaying==true){
-      //console.log('current anim: ', this.animations.currentAnim.name, ', isplaying = ', this.animations.currentAnim.isPlaying)
-      return;
-    }
     if (this.game.global.input.player.two.left.isDown)
     {
       // if(!this.walkingSound.isPlaying){
@@ -77,8 +72,12 @@ class UFO extends Phaser.Sprite {
           this.body.velocity.x += ACCELERATION
         }
     }
-    if (this.left < 0 || this.right > this.game.width + this.width) {
-      this.body.velocity.x = 0
+    let rightBorder = this.body.width;
+
+    if (this.body.x <= 0 || this.body.x >= (this.game.width - rightBorder)) {
+      if (this.body.x <= 0) {this.body.x = 1;}
+      if (this.body.x >= this.game.width - rightBorder){this.body.x = (this.game.width - this.body.width) -1;}
+      this.body.velocity.x = 0;
     }
   }
 
