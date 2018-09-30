@@ -15,7 +15,7 @@ class Menu extends Phaser.State {
       }
 
         const text = this.add.text(this.game.width * 0.5, this.game.height * 0.5, message, {
-            font: '42px Arial',
+            font: '42px Arcade',
             fill: '#ffffff',
             align: 'center',
             wordWrap: true,
