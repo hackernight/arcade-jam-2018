@@ -7,6 +7,7 @@ const ThrownEgg = require('../prefabs/thrownEgg')
 const LaidEgg = require('../prefabs/laidEgg')
 const Chicken = require('../prefabs/chicken')
 const AbductionBeam = require('../prefabs/AbductionBeam')
+const AmmoEggCounter = require('../prefabs/ammoEggCounter')
 //const style = require('../fontStyle');
 
 var flyingEggs = [];
@@ -23,6 +24,7 @@ var isAbducting;
 var UFObeam;
 var chickenCount;
 var eggCount;
+var dinoAmmo;
 
 class Game extends Phaser.State {
 
@@ -57,7 +59,7 @@ class Game extends Phaser.State {
         UFObeam.anchor.y = 0;
         UFObeam.visible = false;
 
-
+        dinoAmmo = 0;
         chickenCount = 5;
 
         for (let i =0; i<chickenCount; i++){
@@ -74,6 +76,7 @@ class Game extends Phaser.State {
         eggHitCounter = 0;
         this.eggedCounter = new EggedCounter(this.game, eggHitLimit)
         this.chickenCounter = new ChickenCounter(this.game)
+        this.AmmoEggCounter = new AmmoEggCounter(this.game)
 
         game.global.input.bindOnDown('one', 'a', this.throwEgg, this)
         game.global.input.bindOnDown('two', 'a', this.abductChicken, this)
@@ -86,6 +89,10 @@ class Game extends Phaser.State {
     update() {
       for (const egg of flyingEggs) {
         this.game.physics.arcade.collide(roswell, egg, this.collisionHandler, null, this)
+      //  this.game.physics.arcade.collide(gordie, egg, this.pickupCollisionHandler, null, this)
+      }
+      for (const egg of laidEggs) {
+        this.game.physics.arcade.collide(gordie, egg, this.pickupCollisionHandler, null, this)
       }
 
       var needToDestroyBeam = true;
@@ -145,9 +152,19 @@ queueEgg(eggCount) {
     }
   }
 
+  pickupCollisionHandler(gordie, egg){
+    dinoAmmo++;
+    this.AmmoEggCounter.updateCount(dinoAmmo);
+    egg.destroy();
+  }
+
     throwEgg(){
-      const flyingEgg = new ThrownEgg(this.game, gordie.x, gordie.y);
-     flyingEggs.push(flyingEgg);
+      if (dinoAmmo > 0){
+        dinoAmmo--;
+        this.AmmoEggCounter.updateCount(dinoAmmo);
+        const flyingEgg = new ThrownEgg(this.game, gordie.x, gordie.y);
+       flyingEggs.push(flyingEgg);
+     }
     }
 
     abductChicken(){
