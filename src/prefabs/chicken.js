@@ -76,8 +76,8 @@ class Chicken extends Phaser.Sprite {
   update() {
 
     //if being abducted, we rise
-    if (this.isAbducting && this.body.velocity.y > -100){
-      this.body.velocity.y -= 5;
+    if (this.isAbducting && this.body.velocity.y > -200){
+      this.body.velocity.y -= 10;
 
     }
     //console.log("chicken body y: " + this.body.y  + "chicken groundlevely: " + this.groundLevely)

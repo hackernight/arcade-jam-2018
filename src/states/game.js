@@ -61,7 +61,7 @@ class Game extends Phaser.State {
         UFObeam.anchor.y = 0;
         UFObeam.visible = false;
 
-        dinoAmmo = 0;
+        dinoAmmo = 1;
         chickenCount = 5;
 
         //make sure to reset arrays in case the game gets replayed
@@ -72,7 +72,7 @@ class Game extends Phaser.State {
           var chicken = new Chicken(this.game, this.game.rnd.integerInRange(50, this.game.width-50), chickenLane, 0);
           chickens.push(chicken);
         }
-        this.queueEgg(EggLimit);
+        this.queueEgg(EggLimit-dinoAmmo);
 
 
         eggHitLimit = 5;
@@ -80,6 +80,7 @@ class Game extends Phaser.State {
         this.eggedCounter = new EggedCounter(this.game, eggHitLimit)
         this.chickenCounter = new ChickenCounter(this.game, chickenCount)
         this.AmmoEggCounter = new AmmoEggCounter(this.game)
+        this.AmmoEggCounter.updateCount(dinoAmmo);
 
         game.global.input.bindOnDown('one', 'a', this.throwEgg, this)
         game.global.input.bindOnDown('two', 'a', this.abductChicken, this)
