@@ -8,6 +8,7 @@ const LaidEgg = require('../prefabs/laidEgg')
 const Chicken = require('../prefabs/chicken')
 const AbductionBeam = require('../prefabs/AbductionBeam')
 const AmmoEggCounter = require('../prefabs/ammoEggCounter')
+const Background = require('../prefabs/Background')
 //const style = require('../fontStyle');
 
 var flyingEggs = [];
@@ -37,6 +38,10 @@ class Game extends Phaser.State {
     }
 
     create() {
+
+      console.log("here 0")
+        new Background(this.game)
+
         const text = this.add.text(this.game.width * 0.5, this.game.height * 0.5, 'Game', {
             font: '42px Arial',
             fill: '#ffffff',
