@@ -4,11 +4,13 @@ const UFO = require('../prefabs/ufo');
 const EggedCounter = require('../prefabs/eggedCounter')
 const ChickenCounter = require('../prefabs/chickenCounter')
 const ThrownEgg = require('../prefabs/thrownEgg')
+const LaidEgg = require('../prefabs/laidEgg')
 const Chicken = require('../prefabs/chicken')
 const AbductionBeam = require('../prefabs/AbductionBeam')
 //const style = require('../fontStyle');
 
 var flyingEggs = [];
+var laidEggs = [];
 var chickens = [];
 var playerLaneY;
 var playerLaneY2;
@@ -20,6 +22,7 @@ var eggHitLimit;
 var isAbducting;
 var UFObeam;
 var chickenCount;
+var eggCount;
 
 class Game extends Phaser.State {
 
@@ -63,6 +66,9 @@ class Game extends Phaser.State {
           chickens.push(chicken);
           console.log("number of chickens: " + chickens.length);
         }
+        eggCount = 5;
+        this.queueEgg(eggCount);
+
 
         eggHitLimit = 5;
         eggHitCounter = 0;
@@ -107,6 +113,14 @@ class Game extends Phaser.State {
 
     }
 
+queueEgg(eggCount) {
+
+  for (let i =0; i<eggCount; i++){
+    var egg = new LaidEgg(this.game, this.game.rnd.integerInRange(50, this.game.width-50), chickenLane, 0);
+    laidEggs.push(egg);
+    console.log("number of eggs: " + laidEggs.length);
+  }
+}
 
   collisionHandler(roswell, egg) {
     egg.body.enable = false;
