@@ -8,8 +8,8 @@
     "phaser:state": "yo phaser:state",
     "phaser:shader": "yo phaser:shader",
     "start": "electron .",
-    "build": "electron-packager . --all --out build --electronVersion 2.0.8 --overwrite",
-    "build-dev": "electron-packager . --out build --electronVersion 2.0.8 --overwrite --arch x64 --platform win32"
+    "build": "electron-packager . --all --out build --electronVersion 3.0.1 --overwrite",
+    "build-dev": "electron-packager . --out build --electronVersion 3.0.1 --overwrite --arch x64 --platform win32"
   },
   "keywords": [],
   "author": "",
