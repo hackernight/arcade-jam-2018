@@ -33,6 +33,18 @@ class Chicken extends Phaser.Sprite {
       // game.global.input.bindOnDown('one', 'left', this.moveLeft, this)
   }
 
+  ChangeDirection(){
+    let action = game.math.roundTo(this.game.rnd.integerInRange(1,3), 0)
+
+
+    if (action==1){
+        this.body.velocity.x=this.body.velocity.x * -1;
+        this.scale.x *= -1;
+    }
+
+
+  }
+
 
   //Code ran on each frame of game
   update() {

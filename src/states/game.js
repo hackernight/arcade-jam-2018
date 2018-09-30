@@ -92,6 +92,8 @@ class Game extends Phaser.State {
         game.global.input.bindOnDown('one', 'b', this.throwEgg, this)
         game.global.input.bindOnDown('two', 'b', this.abductChicken, this)
         this.input.onDown.add(this.endGame, this);
+        game.time.events.loop(1000,this.ChickenMakeDecision,this);
+
 
         this.game.TRexWon = false;
         this.game.UFOWon = false;
@@ -218,6 +220,14 @@ queueEgg(eggCount) {
       if (!abductionValid){
         UFObeam.fizzleBeam();
 
+      }
+
+    }
+
+    ChickenMakeDecision(){
+
+      for(const chicken of chickens){
+        chicken.ChangeDirection();
       }
 
     }
