@@ -119,6 +119,11 @@ class Game extends Phaser.State {
       for (const egg of laidEggs) {
         this.game.physics.arcade.collide(gordie, egg, this.pickupCollisionHandler, null, this)
       }
+      for (const chicken of chickens) {
+        this.game.physics.arcade.collide(roswell, chicken, this.abductionCollisionHandler, null, this)
+      }
+
+      //abductionCollisionHandler
 
       var needToDestroyBeam = true;
       for (const chicken of chickens){
@@ -217,30 +222,32 @@ queueEgg(eggCount) {
       console.log("adding beam");
       UFObeam.visible = true;
       UFObeam.expandBeam();
-      game.time.events.add(Phaser.Timer.SECOND * 3, this.finishAbduction, this);
+      //game.time.events.add(Phaser.Timer.SECOND * 3, this.finishAbduction, this);
     }
 
-    finishAbduction(){
-      if (inEndState){return;}
 
-      for (let i=chickens.length-1; i>=0; i--){
-        let chicken = chickens[i];
-        if (chicken.isAbducting ){
-          console.log("destroyed chicken");
-          chicken.destroy();
-          chickens.splice(i,1);
-          this.chickenCounter.updateCount(chickens.length);
-        }
+      abductionCollisionHandler(roswell, abductedchicken){
+
+          if (inEndState){return;}
+
+          for (let i=chickens.length-1; i>=0; i--){
+            let chicken = chickens[i];
+            if (chicken.isAbducting && chicken.body.x == abductedchicken.body.x &&
+                chicken.body.y == abductedchicken.body.y){
+              roswell.body.velocity.y=0; //don't push the chicken away
+              chicken.destroy();
+              chickens.splice(i,1);
+              this.chickenCounter.updateCount(chickens.length);
+            }
+          }
+
+
+          if (chickens.length == 0){
+            this.game.TRexWon = false;
+            this.game.UFOWon = true;
+            this.endGame();
+          }
       }
-
-
-      if (chickens.length == 0){
-        this.game.TRexWon = false;
-        this.game.UFOWon = true;
-        this.endGame();
-      }
-
-    }
 
     endGame() {
         inEndState = true;
