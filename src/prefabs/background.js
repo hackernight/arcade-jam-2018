@@ -7,7 +7,19 @@ class Background extends Phaser.Sprite {
     this.width = game.width
     game.add.existing(this)
 
+    new NightTile(game)
     new HayTile(game)
+  }
+
+  update() {}
+
+}
+
+class NightTile extends Phaser.TileSprite {
+
+  constructor(game) {
+    super(game, 0,0, game.width, game.height, 'night-sky')
+    game.add.existing(this)
   }
 
   update() {}

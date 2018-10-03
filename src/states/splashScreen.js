@@ -17,6 +17,7 @@ class SplashScreen extends Phaser.State {
         this.game.load.spritesheet('chicken', 'assets/chicken.png', 64, 64)
         this.game.load.spritesheet('beam', 'assets/beam.png', 64, 64)
         this.game.load.image('hay-tile', 'assets/ground-hay.png')
+        this.game.load.image('night-sky', 'assets/night-sky.png')
     }
 
     preload() {
