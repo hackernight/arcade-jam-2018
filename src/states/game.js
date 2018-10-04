@@ -7,7 +7,6 @@ const ThrownEgg = require('../prefabs/thrownEgg')
 const LaidEgg = require('../prefabs/laidEgg')
 const Chicken = require('../prefabs/chicken')
 const AbductionBeam = require('../prefabs/AbductionBeam')
-const AmmoEggCounter = require('../prefabs/ammoEggCounter')
 const Background = require('../prefabs/Background')
 //const style = require('../fontStyle');
 
@@ -57,6 +56,13 @@ class Game extends Phaser.State {
         gordie = new TRex(this.game, playerLaneY- 50, 0);
         roswell = new UFO(this.game, this.game.width - 100, playerLaneY2, 0);
 
+        this.ammoEgg1 = new LaidEgg(this.game, 10, -50, -50)
+        this.ammoEgg2 = new LaidEgg(this.game, -10, -50, -50)
+        gordie.addChild(this.ammoEgg1)
+        gordie.addChild(this.ammoEgg2)
+        this.ammoEgg1.body.enable = false;
+        this.ammoEgg2.body.enable = false;
+
         UFOY = roswell.body.y;
         console.log("UFOY = " + UFOY)
 
@@ -89,8 +95,7 @@ class Game extends Phaser.State {
         eggHitCounter = 0;
         this.eggedCounter = new EggedCounter(this.game, eggHitLimit)
         this.chickenCounter = new ChickenCounter(this.game, chickenCount)
-        this.AmmoEggCounter = new AmmoEggCounter(this.game)
-        this.AmmoEggCounter.updateCount(dinoAmmo);
+        this.updateAmmoDisplay(dinoAmmo);
 
         game.global.input.bindOnDown('one', 'a', this.throwEgg, this)
         game.global.input.bindOnDown('two', 'a', this.abductChicken, this)
@@ -102,6 +107,23 @@ class Game extends Phaser.State {
 
         this.game.TRexWon = false;
         this.game.UFOWon = false;
+    }
+
+    updateAmmoDisplay(dinoAmmo){
+      if (dinoAmmo == 0){
+      this.ammoEgg1.visible = false;
+      this.ammoEgg2.visible = false;
+
+      }
+      if (dinoAmmo == 1){
+        this.ammoEgg1.visible = true;
+        this.ammoEgg2.visible = false;
+      }
+      if (dinoAmmo ==2){
+        this.ammoEgg1.visible = true;
+        this.ammoEgg2.visible = true;
+      }
+
     }
 
     // render(){
@@ -241,7 +263,7 @@ queueEgg(eggCount) {
   pickupCollisionHandler(gordie, egg){
     gordie.body.velocity.y=0;
     dinoAmmo++;
-    this.AmmoEggCounter.updateCount(dinoAmmo);
+    this.updateAmmoDisplay(dinoAmmo);
     for (let i=laidEggs.length-1; i>=0; i--){
       let myegg = laidEggs[i];
       if (myegg.body !=null && egg.body !=null && myegg.body.x == egg.body.x &&
@@ -258,7 +280,7 @@ queueEgg(eggCount) {
       if (dinoAmmo > 0){
         gordie.throwEggAnimation();
         dinoAmmo--;
-        this.AmmoEggCounter.updateCount(dinoAmmo);
+        this.updateAmmoDisplay(dinoAmmo);
         const flyingEgg = new ThrownEgg(
           this.game,
           gordie.x + (64 * (gordie.facing == 'left' ? -1 : 1)),
