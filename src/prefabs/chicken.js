@@ -106,7 +106,7 @@ class Chicken extends Phaser.Sprite {
       this.body.velocity.y += this.game.height/100;
     }
     //  if we've hit the ground, we stop
-    if (!this.isAbducting && this.body.velocity.y !=0 && this.body.y >= this.groundLevely){
+    if (this.body.velocity.y >0 && this.body.y >= this.groundLevely){
       this.body.velocity.y = 0;
       this.body.y = this.groundLevely;
     }
