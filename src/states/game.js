@@ -29,6 +29,7 @@ var dinoAmmo;
 var inEndState;
 const EggLimit = 2;
 var ufoStunned;
+var featherEmitter;
 
 class Game extends Phaser.State {
 
@@ -68,6 +69,7 @@ class Game extends Phaser.State {
 
         dinoAmmo = 1;
         chickenCount = 5;
+
 
         //make sure to reset arrays in case the game gets replayed
         chickens = [];
@@ -248,7 +250,7 @@ queueEgg(eggCount) {
         if ((roswell.body.x  < chicken.body.x) &&
           (roswell.body.x + roswell.body.width) > (chicken.body.x + chicken.body.width))
          {
-           chicken.isAbducting = true;
+           chicken.startAbducting();
            this.addAbductionBeam();
            abductionValid = true;
          }
@@ -278,6 +280,7 @@ queueEgg(eggCount) {
         chicken.ChangeDirection(action);
 
         if (chickenLaysEgg && this.CanSpawnMoreEggs()){
+          chicken.emitFeathers();
           console.log("Chicken laid egg height " + chicken.body.y)
           var egg = new LaidEgg(this.game, chicken.body.x, chicken.body.y, playerLaneY);
           laidEggs.push(egg);

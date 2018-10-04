@@ -1,3 +1,6 @@
+
+const FeatherEmitter = require('../prefabs/featherEmitter')
+
 const SPRITE_SIZE=128;
 const MAX_VELOCITY = 50;
 const ACCELERATION = 25;
@@ -19,6 +22,9 @@ class Chicken extends Phaser.Sprite {
     //this.frame = 0;
     game.add.existing(this);
 
+
+    this.featherEmitter = new FeatherEmitter(this.game, 0, 0);
+    this.addChild(this.featherEmitter);
 
     this.anchor.setTo(.5);
     this.groundLevely = this.body.y;
@@ -71,9 +77,23 @@ class Chicken extends Phaser.Sprite {
 
   }
 
+//Spray some feathers when eggs are laid
+  emitFeathers(){
+    //this.featherEmitter.start(false, 1000, 10, 20)
+    this.featherEmitter.start(true, 1000, null, 30)
+  }
+
+  startAbducting(){
+    this.isAbducting = true;
+    this.featherEmitter.start(true, 250, null, 5)
+  }
 
   //Code ran on each frame of game
   update() {
+
+    // if (!this.isAbducting){
+    //   this.featherEmitter.on = false;
+    // }
 
     //if being abducted, we rise
     if (this.isAbducting && this.body.velocity.y > -(this.game.height*.75)){
