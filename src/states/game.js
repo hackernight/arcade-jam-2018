@@ -30,6 +30,7 @@ var inEndState;
 const EggLimit = 2;
 var ufoStunned;
 var featherEmitter;
+var UFOY;
 
 class Game extends Phaser.State {
 
@@ -56,6 +57,8 @@ class Game extends Phaser.State {
         gordie = new TRex(this.game, playerLaneY- 50, 0);
         roswell = new UFO(this.game, this.game.width - 100, playerLaneY2, 0);
 
+        UFOY = roswell.body.y;
+        console.log("UFOY = " + UFOY)
 
         //game.debug.body(roswell);
 
@@ -116,6 +119,29 @@ class Game extends Phaser.State {
             roswell.angle = Math.sin(this.game.time.time * 1/10) * 5
           }
 
+      }
+      else{
+        if (ufoStunned){
+          //ufo recoils when stunned
+          if (roswell.body.y > roswell.body.height){
+            roswell.body.velocity.y -=40;
+            roswell.angle = Math.sin(this.game.time.time * 1/5) * 5
+          }
+          else {
+            roswell.body.velocity.y = 0;
+            roswell.body.y=roswell.body.height;
+            roswell.angle = 0;
+          }
+        }
+        else {
+          if (roswell.body.y < UFOY){
+            roswell.body.velocity.y += 2;
+          }
+          if (roswell.body.y >= UFOY){
+            roswell.body.velocity.y = 0;
+            roswell.body.y = UFOY;
+          }
+        }
       }
 
         if (!inEndState){
