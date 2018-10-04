@@ -113,6 +113,7 @@ class Game extends Phaser.State {
           if (this.game.TRexWon){
             roswell.body.velocity.y  += 50
             roswell.angle = Math.sin(this.game.time.time * 1/2) * 10
+            gordie.throwEggAnimation();
           }
           if (this.game.UFOWon){
             roswell.body.velocity.y  -= 10

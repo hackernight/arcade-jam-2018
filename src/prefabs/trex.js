@@ -35,7 +35,9 @@ class TRex extends Phaser.Sprite {
   }
 
   throwEggAnimation(){
-    this.animations.play('throw');
+    if (!(this.animations.currentAnim.name =="throw" && this.animations.currentAnim.isPlaying==true)){
+      this.animations.play('throw');
+    }
     //const egg = new ThrownEgg(game, );
   }
 
