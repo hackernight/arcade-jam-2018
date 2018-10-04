@@ -79,7 +79,7 @@ class Game extends Phaser.State {
         laidEggs = [];
         flyingEggs = [];
         for (let i =0; i<chickenCount; i++){
-          var chicken = new Chicken(this.game, this.game.rnd.integerInRange(50, this.game.width-50), chickenLane, 0);
+          var chicken = new Chicken(this.game, this.game.rnd.integerInRange(50, this.game.width-50), chickenLane + this.game.rnd.integerInRange(-5, 5), 0);
           chickens.push(chicken);
         }
         this.queueEgg(EggLimit-dinoAmmo);
