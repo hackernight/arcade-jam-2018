@@ -17,7 +17,7 @@ class TRex extends Phaser.Sprite {
       this.scale.setTo(2,2)
       console.log("I AM GORDON, HEAR ME RAWR")
       game.physics.enable(this, Phaser.Physics.ARCADE);
-      this.frame = 0;
+      this.frame = 8;
       game.add.existing(this);
       // Set Anchor to the center of your sprite
       this.anchor.setTo(.5);
