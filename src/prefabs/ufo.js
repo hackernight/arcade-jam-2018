@@ -11,12 +11,17 @@ class UFO extends Phaser.Sprite {
       super(game, x, y, 'roswell', frame);
       console.log("Im the UFO!")
       game.physics.enable(this, Phaser.Physics.ARCADE);
-      this.frame = 0;
+      //this.frame = 0;
       game.add.existing(this);
       // Set Anchor to the center of your sprite
       this.anchor.setTo(.5);
 
-      this.animations.add('run', [0,1,2,3,4,5,6], 20, false);
+
+      this.body.setSize(155, 70, 50, 20);
+
+      this.animations.add('run', [0,1,2,3,4,5,6], 5, true);
+
+        this.animations.play("run");
       //this.walkingSound = this.game.add.audio('walking')
       //this.walkingSound.volume = .3
       //this.digging = this.game.add.audio('digging')
@@ -34,33 +39,18 @@ class UFO extends Phaser.Sprite {
       //   this.walkingSound.play()
       // }
 
-      if (this.animations.currentAnim.name !="run" || this.animations.currentAnim.isPlaying==false){
-        this.animations.play("run");
-      }
-
-      // if (this.facing == 'right'){
-      //   // Invert scale.x to flip left/right
-      //   this.scale.x *= -1;
-      //   this.facing = 'left';
+      // if (this.animations.currentAnim.name !="run" || this.animations.currentAnim.isPlaying==false){
+      //   this.animations.play("run");
       // }
       this.body.velocity.x -= ACCELERATION
       this.body.velocity.x = Math.max(this.body.velocity.x, -MAX_VELOCITY)
     }
     else if (this.game.global.input.player.two.right.isDown)
     {
-      // if(!this.walkingSound.isPlaying){
-      //   this.walkingSound.play()
-      // }
 
-      if (this.animations.currentAnim.name !="run" || this.animations.currentAnim.isPlaying==false){
-        this.animations.play("run");
-      }
-      // if (this.facing == 'left'){
-      //   // Invert scale.x to flip left/right
-      //   this.scale.x *= -1;
-      //   this.facing = 'right';
+      // if (this.animations.currentAnim.name !="run" || this.animations.currentAnim.isPlaying==false){
+      //   this.animations.play("run");
       // }
-
       this.body.velocity.x += ACCELERATION
       this.body.velocity.x = Math.min(this.body.velocity.x, MAX_VELOCITY)
     }
@@ -71,6 +61,9 @@ class UFO extends Phaser.Sprite {
         } else if (this.body.velocity.x < 0) {
           this.body.velocity.x += ACCELERATION
         }
+        if (Math.abs(this.body.velocity.x) < ACCELERATION){
+          this.body.velocity.x = 0;
+        }
     }
     let rightBorder = this.body.width;
 
@@ -79,6 +72,7 @@ class UFO extends Phaser.Sprite {
       if (this.body.x >= this.game.width - rightBorder){this.body.x = (this.game.width - this.body.width) -1;}
       this.body.velocity.x = 0;
     }
+
   }
 
   startBuilding(){

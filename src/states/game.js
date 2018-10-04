@@ -55,6 +55,9 @@ class Game extends Phaser.State {
         gordie = new TRex(this.game, playerLaneY- 50, 0);
         roswell = new UFO(this.game, this.game.width - 100, playerLaneY2, 0);
 
+
+        //game.debug.body(roswell);
+
         ufoStunned = false;
         UFObeam = new AbductionBeam(this.game, playerLaneY, 0, roswell.width);
         roswell.addChild(UFObeam);
@@ -95,6 +98,10 @@ class Game extends Phaser.State {
         this.game.TRexWon = false;
         this.game.UFOWon = false;
     }
+
+    // render(){
+    //   game.debug.body(roswell);
+    // }
 
     update() {
       if (inEndState){
