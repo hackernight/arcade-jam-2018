@@ -22,6 +22,14 @@ class Chicken extends Phaser.Sprite {
     //this.frame = 0;
     game.add.existing(this);
 
+//sound import
+    this.abductionSound = this.game.add.audio('chicken-capture')
+    this.abductionSound.volume = 1
+    this.idleSound = this.game.add.audio('chicken-single-cluck')
+    this.idleSound.volume = .3
+    this.eggLaySound = this.game.add.audio('chicken-double-cluck')
+    this.eggLaySound.volume = 1
+//
 
     this.featherEmitter = new FeatherEmitter(this.game, 0, 0);
     this.addChild(this.featherEmitter);
@@ -54,6 +62,12 @@ class Chicken extends Phaser.Sprite {
         }
         this.body.velocity.x=this.body.velocity.x * -1;
         this.scale.x *= -1;
+
+        //and cluck, because you just thought of something that made you return
+        if(!this.idleSound.isPlaying){
+          this.idleSound.play()
+        }
+
     }
     if (action>=3 && action <=5){
       //stop
@@ -81,11 +95,21 @@ class Chicken extends Phaser.Sprite {
   emitFeathers(){
     //this.featherEmitter.start(false, 1000, 10, 20)
     this.featherEmitter.start(true, 1000, null, 30)
+    if(!this.eggLaySound.isPlaying){
+      this.eggLaySound.play()
+    }
+
   }
 
   startAbducting(){
     this.isAbducting = true;
     this.featherEmitter.start(true, 250, null, 5)
+    //chicken-capture
+
+    if(!this.abductionSound.isPlaying){
+      this.abductionSound.play()
+    }
+
   }
 
   //Code ran on each frame of game

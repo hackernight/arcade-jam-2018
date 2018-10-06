@@ -19,6 +19,23 @@ class SplashScreen extends Phaser.State {
         this.game.load.image('hay-tile', 'assets/ground-hay.png')
         this.game.load.image('night-sky', 'assets/night-sky.png')
         this.game.load.image('feather', 'assets/feather.png')
+
+
+        this.game.load.audio('chicken-capture', ['assets/sounds/Capture_bagok.wav']);
+        this.game.load.audio('chicken-double-cluck', ['assets/sounds/Double_cluck.wav']);
+        this.game.load.audio('chicken-single-cluck', ['assets/sounds/Single_cluck.wav']);
+
+        this.game.load.audio('dino-long-roar', ['assets/sounds/Long_roar.wav']);
+        this.game.load.audio('dino-chuck-short', ['assets/sounds/Short_chuck.wav']);
+        this.game.load.audio('dino-short-roar', ['assets/sounds/Short_roar.wav']);
+        this.game.load.audio('dino-chuck-roar', ['assets/sounds/Chuck_Roar.wav']);
+
+        this.game.load.audio('beam-fire', ['assets/sounds/Beam_Fire.wav']);
+        this.game.load.audio('beam-long-active', ['assets/sounds/Beam_Long_active.wav']);
+        this.game.load.audio('egg-splat', ['assets/sounds/Egg_splat.wav']);
+        this.game.load.audio('ufo-victory', ['assets/sounds/Space_ship_take_off.wav']);
+        this.game.load.audio('ufo-loss', ['assets/sounds/UFO_Shot_down.wav']);
+
     }
 
     preload() {
