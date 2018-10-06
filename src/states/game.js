@@ -341,6 +341,7 @@ queueEgg(eggCount) {
     addAbductionBeam(){
       console.log("adding beam");
       UFObeam.expandBeam();
+      roswell.playBeamFireSound();
       //game.time.events.add(Phaser.Timer.SECOND * 3, this.finishAbduction, this);
     }
 

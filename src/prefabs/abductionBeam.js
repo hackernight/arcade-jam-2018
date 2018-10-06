@@ -21,6 +21,12 @@ class AbductionBeam extends Phaser.Sprite {
 
       this.alpha = 0.7;
 
+
+      this.beamFireSound = this.game.add.audio('beam-fire')
+      this.beamFireSound.volume = .7
+      this.beamSustainSound = this.game.add.audio('beam-long-active')
+      this.beamSustainSound.volume = .7
+
       this.animations.add('expand', [0,1,2,3], 20, false);
       this.animations.add('sparkle', [2,3,4,5,6], 20, true);
       this.animations.add('fizzle', [0,1], 20, false);
@@ -38,19 +44,34 @@ class AbductionBeam extends Phaser.Sprite {
       // game.global.input.bindOnDown('one', 'left', this.moveLeft, this)
 
   }
+
+
       fizzleBeam(){
         console.log("fizzling beam");
+        if(!this.beamFireSound.isPlaying){
+          this.beamFireSound.play()
+        }
         this.visible = true;
         this.animations.play("fizzle");
       }
 
     expandBeam(){
       this.visible = true;
+      if(!this.beamFireSound.isPlaying){
+        this.beamFireSound.play()
+      }
+      if(!this.beamSustainSound.isPlaying){
+        this.beamSustainSound.play()
+        this.beamSustainSound.loopFull(0.6)
+      }
+
       this.animations.play("expand");
       this.animations.play("sparkle", 15, true);
     }
 
     stopBeam(){
+      this.beamSustainSound.stop();
+      this.beamFireSound.stop();
       if ((this.animations.currentAnim.name =="expand" ||this.animations.currentAnim.name =="sparkle") &&
           this.animations.currentAnim.isPlaying==true){
           this.animations.stop();
@@ -63,6 +84,13 @@ class AbductionBeam extends Phaser.Sprite {
 
   //Code ran on each frame of game
   update() {
+    // //sustain if beam is going and no sound is happening
+    // if (this.animations.currentAnim.name =="sparkle" &&
+    //     this.animations.currentAnim.isPlaying==true &&
+    //     !this.beamFireSound.isPlaying &&
+    //     !this.beamSustainSound.isPlaying){
+    //         this.beamSustainSound.play();
+    //   }
 
   }
 

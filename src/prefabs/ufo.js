@@ -16,7 +16,6 @@ class UFO extends Phaser.Sprite {
       // Set Anchor to the center of your sprite
       this.anchor.setTo(.5);
 
-
       this.body.setSize(155, 70, 50, 20);
 
       this.animations.add('run', [0,1,2,3,4,5,6], 5, true);
@@ -29,6 +28,8 @@ class UFO extends Phaser.Sprite {
       // Invert scale.x to flip left/right
       //this.scale.x *= -1;
   }
+
+
 
   //Code ran on each frame of game
   update() {
@@ -75,14 +76,7 @@ class UFO extends Phaser.Sprite {
 
   }
 
-  startBuilding(){
 
-    this.body.velocity.x = 0
-    this.animations.play("build");
-    if(!this.digging.isPlaying){
-      this.digging.play()
-    }
-  }
 
 
 }
