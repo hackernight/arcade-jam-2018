@@ -20,6 +20,10 @@ class ThrownEgg extends Phaser.Sprite {
       console.log("maxthrowheight= " + maxthrowHeight + ", throwheight = " + this.throwHeight)
       this.drag = this.game.height/200;
 
+
+      this.splatterSound = this.game.add.audio('egg-splat')
+      this.splatterSound.volume = .7
+
       this.isSplattering = false;
       this.animations.add('splatter', [1,2,3], 20, false);
 
@@ -55,6 +59,9 @@ class ThrownEgg extends Phaser.Sprite {
   }
 
   splatter(){
+  if(!this.splatterSound.isPlaying){
+    this.splatterSound.play()
+  }
     this.isSplattering = true;
     this.animations.play("splatter");
   }

@@ -66,6 +66,12 @@ class Game extends Phaser.State {
         UFOY = roswell.body.y;
         console.log("UFOY = " + UFOY)
 
+
+        this.ufoVictorySound = this.game.add.audio('ufo-victory')
+        this.ufoVictorySound.volume = 1
+        this.ufoLossSound = this.game.add.audio('ufo-loss')
+        this.ufoLossSound.volume = 1
+
         //game.debug.body(roswell);
 
         ufoStunned = false;
@@ -250,6 +256,9 @@ queueEgg(eggCount) {
     if (eggHitCounter == eggHitLimit){
       this.game.TRexWon = true;
       this.game.UFOWon = false;
+      if(!this.ufoLossSound.isPlaying){
+        this.ufoLossSound.play()
+      }
       this.endGame();
     }
   }
@@ -365,6 +374,9 @@ queueEgg(eggCount) {
           if (chickens.length == 0){
             this.game.TRexWon = false;
             this.game.UFOWon = true;
+            if(!this.ufoVictorySound.isPlaying){
+              this.ufoVictorySound.play()
+            }
             this.endGame();
           }
       }
