@@ -38,6 +38,8 @@ class SplashScreen extends Phaser.State {
 
         this.game.load.audio('level-music', ['assets/sounds/Off Limits.wav']);
         this.game.load.audio('menu-music', ['assets/sounds/Power Bots Loop.wav']);
+        this.game.load.audio('ufo-victory-music', ['assets/sounds/Space Trip.wav']);
+        this.game.load.audio('trex-victory-music', ['assets/sounds/Minimal Funky Loop.wav']);
     }
 
     preload() {

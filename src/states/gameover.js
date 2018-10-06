@@ -14,9 +14,13 @@ class Menu extends Phaser.State {
       var message = 'Play again?';
       if (this.game.TRexWon){
         message = "T-Rex 🦖 saved her descendants 🐓 from the aliens 🛸! Hooray!";
+        this.levelMusic = this.game.add.audio('trex-victory-music')
+        this.levelMusic.loopFull(0.15)
       }
       if (this.game.UFOWon){
         message = "The aliens 🛸 love ❤️ their new pet chickens 🐓! Hooray!";
+        this.levelMusic = this.game.add.audio('ufo-victory-music')
+        this.levelMusic.loopFull(0.15)
       }
 
         const text = this.add.text(this.game.width * 0.5, this.game.height * 0.5, message, {
@@ -42,6 +46,7 @@ class Menu extends Phaser.State {
     update() {}
 
     restartGame() {
+        this.levelMusic.stop()
         this.game.state.start('menu');
     }
 
