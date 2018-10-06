@@ -48,6 +48,12 @@ class Chicken extends Phaser.Sprite {
     this.animations.add('run', [0,1,2,3,4,5,6,7], 20, false);
   }
 
+  IdleCluck(){
+    if(!this.idleSound.isPlaying){
+      this.idleSound.play()
+    }
+  }
+
   ChangeDirection(action){
 
     if (action>=1 && action<=2){
@@ -64,9 +70,15 @@ class Chicken extends Phaser.Sprite {
         this.scale.x *= -1;
 
         //and cluck, because you just thought of something that made you return
-        if(!this.idleSound.isPlaying){
-          this.idleSound.play()
-        }
+        const timer = this.game.time.create(false)
+        let delay = game.math.roundTo(this.game.rnd.integerInRange(1,5), 0) * 0.1
+
+        timer.add(Phaser.Timer.SECOND * delay, () => {
+          this.IdleCluck();
+        })
+        timer.start();
+
+
 
     }
     if (action>=3 && action <=5){

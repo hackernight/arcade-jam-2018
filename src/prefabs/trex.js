@@ -24,11 +24,11 @@ class TRex extends Phaser.Sprite {
 
 //dino-chuck-roar
       this.eggPickUpSound = this.game.add.audio('dino-short-roar')
-      this.eggPickUpSound.volume = 1
+      this.eggPickUpSound.volume = .7
       this.sadDinoSound = this.game.add.audio('dino-long-roar')
       this.sadDinoSound.volume = 1
       this.eggChuckSound = this.game.add.audio('dino-chuck-short')
-      this.eggChuckSound.volume = 1
+      this.eggChuckSound.volume = .7
 
 
 
