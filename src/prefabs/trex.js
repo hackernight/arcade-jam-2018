@@ -117,6 +117,9 @@ class TRex extends Phaser.Sprite {
         } else if (this.body.velocity.x < 0) {
           this.body.velocity.x += ACCELERATION
         }
+       if (this.animations.currentAnim.name =="run" && this.animations.currentAnim.isPlaying==true && this.body.velocity.x ==0){
+         this.animations.currentAnim.stop();
+       }
     }
     if (this.left < 0 || this.right > this.game.width + this.width) {
       this.body.velocity.x = 0
