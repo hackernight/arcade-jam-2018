@@ -1,5 +1,6 @@
 
 const FlashingText = require('../prefabs/FlashingText');
+const Background = require('../prefabs/Background')
 
 class Menu extends Phaser.State {
 
@@ -9,6 +10,7 @@ class Menu extends Phaser.State {
 
     create() {
 
+      new Background(this.game)
       var message = 'Play again?';
       if (this.game.TRexWon){
         message = "T-Rex 🦖 saved her descendants 🐓 from the aliens 🛸! Hooray!";

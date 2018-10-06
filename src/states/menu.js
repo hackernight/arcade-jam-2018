@@ -1,5 +1,6 @@
 const CenteredText = require('../prefabs/CenteredText');
 const FlashingText = require('../prefabs/FlashingText');
+const Background = require('../prefabs/Background')
 
 
 class Menu extends Phaser.State {
@@ -13,7 +14,9 @@ class Menu extends Phaser.State {
     }
 
     create() {
-        game.stage.backgroundColor = "#213ad1";
+        //game.stage.backgroundColor = "#213ad1";
+        new Background(this.game)
+
 
         // Title
         new CenteredText(this.game, this.game.height * 0.10, 'An', {fontSize: '50px', font: 'Gameplay'})
