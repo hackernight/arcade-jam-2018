@@ -34,6 +34,10 @@ class Menu extends Phaser.State {
 
         new FlashingText(this.game, this.game.world.centerX, this.game.height, 'Press to continue')
 
+
+        this.levelMusic = this.game.add.audio('menu-music')
+        this.levelMusic.loopFull(0.15)
+
         this.game.global.input.bindOnDown('one', 'a', this.startGame, this)
         this.game.global.input.bindOnDown('one', 'b', this.startGame, this)
         this.game.global.input.bindOnDown('two', 'a', this.startGame, this)
@@ -44,6 +48,7 @@ class Menu extends Phaser.State {
     update() {}
 
     startGame() {
+        this.levelMusic.stop()
         this.game.state.start('game');
     }
 

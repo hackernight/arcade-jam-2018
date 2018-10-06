@@ -72,6 +72,10 @@ class Game extends Phaser.State {
         this.ufoLossSound = this.game.add.audio('ufo-loss')
         this.ufoLossSound.volume = 1
 
+        this.levelMusic = this.game.add.audio('level-music')
+        this.levelMusic.loopFull(0.15)
+
+//'level-music'
         //game.debug.body(roswell);
 
         ufoStunned = false;
@@ -389,6 +393,7 @@ queueEgg(eggCount) {
           this.game.state.start('gameover');
         })
         timer.start();
+        this.levelMusic.stop()
 
     }
 
