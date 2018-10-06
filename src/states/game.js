@@ -273,6 +273,7 @@ queueEgg(eggCount) {
     gordie.body.velocity.y=0;
     dinoAmmo++;
     this.updateAmmoDisplay(dinoAmmo);
+    gordie.playEggPickupSound();
     for (let i=laidEggs.length-1; i>=0; i--){
       let myegg = laidEggs[i];
       if (myegg.body !=null && egg.body !=null && myegg.body.x == egg.body.x &&
@@ -367,6 +368,7 @@ queueEgg(eggCount) {
               chicken.destroy();
               chickens.splice(i,1);
               this.chickenCounter.updateCount(chickens.length);
+              gordie.playDistraughtDinoSound();
             }
           }
 

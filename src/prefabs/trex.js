@@ -22,6 +22,14 @@ class TRex extends Phaser.Sprite {
       // Set Anchor to the center of your sprite
       this.anchor.setTo(.5);
 
+//dino-chuck-roar
+      this.eggPickUpSound = this.game.add.audio('dino-short-roar')
+      this.eggPickUpSound.volume = 1
+      this.sadDinoSound = this.game.add.audio('dino-long-roar')
+      this.sadDinoSound.volume = 1
+      this.eggChuckSound = this.game.add.audio('dino-chuck-short')
+      this.eggChuckSound.volume = 1
+
 
 
       this.animations.add('run', [0,1,2,3,4,5,6,7], 10, false);
@@ -34,8 +42,23 @@ class TRex extends Phaser.Sprite {
       this.scale.x *= -1;
   }
 
+  playEggPickupSound(){
+    if(!this.eggPickUpSound.isPlaying){
+      this.eggPickUpSound.play()
+    }
+  }
+
+  playDistraughtDinoSound(){
+    if(!this.sadDinoSound.isPlaying){
+      this.sadDinoSound.play()
+    }
+  }
+
   throwEggAnimation(){
     if (!(this.animations.currentAnim.name =="throw" && this.animations.currentAnim.isPlaying==true)){
+      if(!this.eggChuckSound.isPlaying){
+        this.eggChuckSound.play()
+      }
       this.animations.play('throw');
     }
     //const egg = new ThrownEgg(game, );
@@ -100,14 +123,7 @@ class TRex extends Phaser.Sprite {
     }
   }
 
-  startBuilding(){
 
-    this.body.velocity.x = 0
-    this.animations.play("build");
-    if(!this.digging.isPlaying){
-      this.digging.play()
-    }
-  }
 
 
 }
